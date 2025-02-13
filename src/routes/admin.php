@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use GIS\EditableBlocks\Http\Controllers\Admin\BlockController;
 
 Route::middleware(["web", "auth", "app-management"])
     ->prefix("admin")
@@ -9,8 +10,7 @@ Route::middleware(["web", "auth", "app-management"])
         Route::prefix("blocks")
             ->as("blocks.")
             ->group(function () {
-                Route::get("/", function () {
-                    return "blocks";
-                })->name("index");
+                $adminBlockController = config("editable-blocks.customAdminBlockController") ?? BlockController::class;
+                Route::get("/", [$adminBlockController, "index"])->name("index");
             });
     });
