@@ -9,6 +9,7 @@ return [
     "static" => [],
     // Admin
     "customAdminBlockController" => null,
+    "customBlockActionsManager" => null,
     "customBlockModel" => null,
     "customBlockItemModel" => null,
     "customSimpleBlockRecordModel" => null,

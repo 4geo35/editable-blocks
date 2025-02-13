@@ -2,6 +2,7 @@
 
 namespace GIS\EditableBlocks;
 
+use GIS\EditableBlocks\Helpers\BlockActionsManager;
 use Illuminate\Support\ServiceProvider;
 
 class EditableBlocksServiceProvider extends ServiceProvider
@@ -25,10 +26,21 @@ class EditableBlocksServiceProvider extends ServiceProvider
 
         // Routes
         $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
+
+        // Facades
+        $this->initFacades();
     }
 
     protected function addLivewireComponents(): void
     {
 
+    }
+
+    protected function initFacades(): void
+    {
+        $this->app->singleton("block-actions", function () {
+            $blockActionsManagerClass = config("editable-blocks.customBlockActionsManager") ?? BlockActionsManager::class;
+            return new $blockActionsManagerClass;
+        });
     }
 }
