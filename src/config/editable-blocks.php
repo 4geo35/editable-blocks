@@ -1,3 +1,8 @@
 <?php
 
-return [];
+return [
+    // Admin
+    "customBlockModel" => null,
+    "customBlockItemModel" => null,
+    "customSimpleBlockRecordModel" => null,
+];
