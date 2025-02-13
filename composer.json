@@ -1,0 +1,29 @@
+{
+    "name": "4geo35/editable-blocks",
+    "description": "Block models for edit in admin panel",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir",
+            "email": "aweram-team@yandex.ru"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^11.0",
+        "4geo35/tailwindcss-theme": "@dev",
+        "4geo35/user-management": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "GIS\\EditableBlocks\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GIS\\EditableBlocks\\EditableBlocksServiceProvider"
+            ]
+        }
+    }
+}
