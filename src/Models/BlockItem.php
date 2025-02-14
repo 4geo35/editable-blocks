@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class BlockItem extends Model implements BlockItemModelInterface
 {
     protected $fillable = [
-        "title"
+        "title",
+        "block_id"
     ];
 
     public function block(): BelongsTo

@@ -96,6 +96,6 @@ class ManageBlocksWire extends Component
 
     protected function resetFields(): void
     {
-        $this->reset("type", "typeTitle");
+        $this->reset("type", "typeTitle", "title");
     }
 }
