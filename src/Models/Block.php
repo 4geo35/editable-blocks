@@ -11,7 +11,7 @@ class Block extends Model implements BlockModelInterface
     protected $fillable = [
         "title",
         "type",
-        "page",
+        "group",
         "key",
     ];
 

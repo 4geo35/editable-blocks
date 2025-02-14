@@ -10,8 +10,11 @@ return [
     // Admin
     "customAdminBlockController" => null,
     "customBlockActionsManager" => null,
-    "customSwitchGroupComponent" => null,
     "customBlockModel" => null,
+    "customBlockModelObserver" => null,
     "customBlockItemModel" => null,
     "customSimpleBlockRecordModel" => null,
+
+    "customSwitchGroupComponent" => null,
+    "customManageBlocksComponent" => null,
 ];

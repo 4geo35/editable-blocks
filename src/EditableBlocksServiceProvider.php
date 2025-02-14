@@ -3,7 +3,10 @@
 namespace GIS\EditableBlocks;
 
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
+use GIS\EditableBlocks\Livewire\Admin\Blocks\ManageBlocksWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\SwitchGroupWire;
+use GIS\EditableBlocks\Models\Block;
+use GIS\EditableBlocks\Observers\BlockObserver;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -16,6 +19,11 @@ class EditableBlocksServiceProvider extends ServiceProvider
 
         // Livewire
         $this->addLivewireComponents();
+
+        // Observers
+        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+        $blockObserverClass = config("editable-blocks.customBlockModelObserver") ?? BlockObserver::class;
+        $blockModelClass::observe($blockObserverClass);
     }
 
     public function register(): void
@@ -36,10 +44,16 @@ class EditableBlocksServiceProvider extends ServiceProvider
     protected function addLivewireComponents(): void
     {
         // Block
-        $component = config("article-pages.customSwitchGroupComponent");
+        $component = config("editable-blocks.customSwitchGroupComponent");
         Livewire::component(
             "eb-switch-group",
             $component ?? SwitchGroupWire::class
+        );
+
+        $component = config("editable-blocks.customManageBlocksComponent");
+        Livewire::component(
+            "eb-manage-blocks",
+            $component ?? ManageBlocksWire::class
         );
     }
 

@@ -3,4 +3,6 @@
     <x-slot name="pageTitle">Блоки</x-slot>
 
     <livewire:eb-switch-group />
+
+    <livewire:eb-manage-blocks />
 </x-admin-layout>
