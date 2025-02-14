@@ -5,11 +5,12 @@ return [
     "availableTypes" => [
         "imageText" => "Текст с изображением"
     ],
-    "pages" => [],
+    "groups" => [],
     "static" => [],
     // Admin
     "customAdminBlockController" => null,
     "customBlockActionsManager" => null,
+    "customSwitchGroupComponent" => null,
     "customBlockModel" => null,
     "customBlockItemModel" => null,
     "customSimpleBlockRecordModel" => null,

@@ -3,7 +3,9 @@
 namespace GIS\EditableBlocks;
 
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
+use GIS\EditableBlocks\Livewire\Admin\Blocks\SwitchGroupWire;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class EditableBlocksServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,12 @@ class EditableBlocksServiceProvider extends ServiceProvider
 
     protected function addLivewireComponents(): void
     {
-
+        // Block
+        $component = config("article-pages.customSwitchGroupComponent");
+        Livewire::component(
+            "eb-switch-group",
+            $component ?? SwitchGroupWire::class
+        );
     }
 
     protected function initFacades(): void

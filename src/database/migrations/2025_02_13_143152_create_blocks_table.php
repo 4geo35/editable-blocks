@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string("title");
             $table->string("type");
-            $table->string("page")->nullable();
+            $table->string("group")->nullable();
             $table->string("key")->unique()->nullable();
 
             $table->unsignedBigInteger("editable_id")
