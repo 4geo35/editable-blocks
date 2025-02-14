@@ -10,6 +10,7 @@ use Livewire\Component;
 class BlockListWire extends Component
 {
     public string $currentGroup = "";
+    public string $updatedAt = "";
 
     protected function queryString(): array
     {
@@ -20,6 +21,7 @@ class BlockListWire extends Component
 
     public function mount(): void
     {
+        $this->updatedAt = now()->toString();
         if (empty($this->currentGroup)) {
             $buttons = BlockActions::getGroupButtons();
             if (! empty($buttons)) {
@@ -31,12 +33,19 @@ class BlockListWire extends Component
     public function render(): View
     {
         $blocks = BlockActions::getBlocksByGroup($this->currentGroup);
-        return view('eb::livewire.admin.blocks.block-list-wire', compact("blocks"));
+        $updatedTime = $this->updatedAt;
+        return view('eb::livewire.admin.blocks.block-list-wire', compact("blocks", "updatedTime"));
     }
 
     #[On("set-group")]
     public function setGroup(string $key): void
     {
         $this->currentGroup = $key;
+    }
+
+    #[On("create-new-block")]
+    public function updateList(int $id): void
+    {
+        $this->updatedAt = now()->toString();
     }
 }

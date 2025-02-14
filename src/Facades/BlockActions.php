@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array getAvailableBlocks(string $key)
  * @method static string getTypeTitle(string $key)
  * @method static Collection|null getBlocksByGroup(string $key)
+ * @method static string getComponentByType(string $key)
  *
  * @see BlockActionsManager
  */

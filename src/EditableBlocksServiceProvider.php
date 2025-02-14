@@ -2,6 +2,7 @@
 
 namespace GIS\EditableBlocks;
 
+use GIS\EditableBlocks\Livewire\Admin\Blocks\ImageTextWire;
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\BlockListWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\ManageBlocksWire;
@@ -61,6 +62,12 @@ class EditableBlocksServiceProvider extends ServiceProvider
         Livewire::component(
             "eb-block-list",
             $component ?? BlockListWire::class
+        );
+
+        $component = config("editable-blocks.customImageTextComponent");
+        Livewire::component(
+            "eb-image-text",
+            $component ?? ImageTextWire::class
         );
     }
 

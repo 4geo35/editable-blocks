@@ -5,6 +5,10 @@ return [
     "availableTypes" => [
         "imageText" => "Текст с изображением"
     ],
+    "typeComponents" => [
+        "imageText" => "eb-image-text"
+    ],
+    "customTypeComponents" => [],
     "groups" => [],
     "static" => [],
     // Admin
@@ -18,4 +22,5 @@ return [
     "customSwitchGroupComponent" => null,
     "customManageBlocksComponent" => null,
     "customBlockListComponent" => null,
+    "customImageTextComponent" => null,
 ];

@@ -63,4 +63,10 @@ class BlockActionsManager
         else $query->where("group", $key);
         return $query->orderBy("priority")->get();
     }
+
+    public function getComponentByType(string $key): string
+    {
+        if (! config("editable-blocks.typeComponents")[$key]) return ""; // TODO: make default component with error
+        return config("editable-blocks.typeComponents")[$key];
+    }
 }
