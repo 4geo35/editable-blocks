@@ -2,6 +2,9 @@
 
 namespace GIS\EditableBlocks\Helpers;
 
+use GIS\EditableBlocks\Models\Block;
+use Illuminate\Database\Eloquent\Collection;
+
 class BlockActionsManager
 {
     public function getGroupButtons(): array
@@ -49,5 +52,15 @@ class BlockActionsManager
     {
         if (empty(config("editable-blocks.availableTypes")[$key])) return "";
         return config("editable-blocks.availableTypes")[$key];
+    }
+
+    public function getBlocksByGroup(string $key): ?Collection
+    {
+        if (! $this->checkIfGroupExists($key)) return null;
+        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+        $query = $blockModelClass::query();
+        if ($key === "static") $query->whereNotNull("key");
+        else $query->where("group", $key);
+        return $query->orderBy("priority")->get();
     }
 }

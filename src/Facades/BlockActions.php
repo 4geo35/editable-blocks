@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Facades;
 
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool checkIfGroupExists(string $key)
  * @method static array getAvailableBlocks(string $key)
  * @method static string getTypeTitle(string $key)
+ * @method static Collection|null getBlocksByGroup(string $key)
  *
  * @see BlockActionsManager
  */

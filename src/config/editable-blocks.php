@@ -17,4 +17,5 @@ return [
 
     "customSwitchGroupComponent" => null,
     "customManageBlocksComponent" => null,
+    "customBlockListComponent" => null,
 ];

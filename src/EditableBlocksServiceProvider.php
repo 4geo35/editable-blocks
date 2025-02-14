@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks;
 
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
+use GIS\EditableBlocks\Livewire\Admin\Blocks\BlockListWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\ManageBlocksWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\SwitchGroupWire;
 use GIS\EditableBlocks\Models\Block;
@@ -54,6 +55,12 @@ class EditableBlocksServiceProvider extends ServiceProvider
         Livewire::component(
             "eb-manage-blocks",
             $component ?? ManageBlocksWire::class
+        );
+
+        $component = config("editable-blocks.customBlockListComponent");
+        Livewire::component(
+            "eb-block-list",
+            $component ?? BlockListWire::class
         );
     }
 

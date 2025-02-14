@@ -1,4 +1,4 @@
-<div class="mt-indent-half">
+<div class="">
     <div class="card">
         <div class="card-header">
             <h2 class="font-medium text-2xl">Добавить блок</h2>
