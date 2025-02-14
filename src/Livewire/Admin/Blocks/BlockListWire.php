@@ -48,4 +48,10 @@ class BlockListWire extends Component
     {
         $this->updatedAt = now()->toString();
     }
+
+    #[On("delete-block")]
+    public function deletedBlock(int $id): void
+    {
+        $this->updateList($id);
+    }
 }

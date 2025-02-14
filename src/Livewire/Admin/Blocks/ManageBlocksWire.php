@@ -88,6 +88,12 @@ class ManageBlocksWire extends Component
         session()->flash("manage-success", "Блок успешно добавлен");
     }
 
+    #[On("delete-block")]
+    public function deletedBlock(int $id): void
+    {
+        session()->flash("manage-success", "Блок успешно удален");
+    }
+
     protected function resetFields(): void
     {
         $this->reset("type", "typeTitle");

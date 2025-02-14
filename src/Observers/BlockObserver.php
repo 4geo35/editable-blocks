@@ -22,4 +22,9 @@ class BlockObserver
         if (empty($priority)) $priority = 0;
         $block->priority = $priority + 1;
     }
+
+    public function deleted(BlockModelInterface $block): void
+    {
+        // TODO: clear items
+    }
 }
