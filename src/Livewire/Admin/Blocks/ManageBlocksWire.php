@@ -5,21 +5,27 @@ namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 use GIS\EditableBlocks\Facades\BlockActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Models\Block;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class ManageBlocksWire extends Component
 {
+    public bool $hasSearch = false;
     public string $currentGroup = "";
 
     public bool $displayDelete = false;
     public bool $displayData = false;
+    public bool $displayOrder = false;
+
     public string $type = "";
     public string $typeTitle = "";
 
     public string $title = "";
     public int|null $blockId = null;
+
+    public Collection|null $blockOrderList = null;
 
     protected function queryString(): array
     {
@@ -146,6 +152,34 @@ class ManageBlocksWire extends Component
         session()->flash("manage-success", "Блок успешно удален");
     }
 
+    public function showOrder(): void
+    {
+        $this->resetFields();
+        $this->displayOrder = true;
+        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup);
+        $this->dispatch("update-list");
+    }
+
+    public function closeOrder(): void
+    {
+        $this->resetFields();
+        $this->displayOrder = false;
+    }
+
+    public function reorderItems(array $newOrder): void
+    {
+        foreach ($newOrder as $priority => $id) {
+            $this->blockId = $id;
+            $block = $this->findBlock();
+            if (! $block) continue;
+            $block->priority = $priority;
+            $block->save();
+        }
+        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup);
+        $this->dispatch("update-block-list", id: 0);
+        $this->dispatch("update-list");
+    }
+
     protected function findBlock(): ?BlockModelInterface
     {
         $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
@@ -160,6 +194,6 @@ class ManageBlocksWire extends Component
 
     protected function resetFields(): void
     {
-        $this->reset("type", "typeTitle", "title", "blockId");
+        $this->reset("type", "typeTitle", "title", "blockId", "blockOrderList");
     }
 }

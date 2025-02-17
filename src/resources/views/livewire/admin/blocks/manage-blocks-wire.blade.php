@@ -1,7 +1,13 @@
 <div class="">
     <div class="card">
         <div class="card-header">
-            <h2 class="font-medium text-2xl">Добавить блок</h2>
+            <div class="flex justify-between">
+                <h2 class="font-medium text-2xl">Добавить блок</h2>
+                <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x" wire:click="showOrder">
+                    <x-tt::ico.bars />
+                    <span class="hidden lg:inline-block pl-btn-ico-text">Порядок</span>
+                </button>
+            </div>
         </div>
         <div class="card-body">
             <div class="space-y-indent-half">
@@ -25,3 +31,4 @@
 
     @include("eb::admin.blocks.includes.modals")
 </div>
+@include("tt::admin.draggable-script")

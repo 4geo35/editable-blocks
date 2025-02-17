@@ -32,3 +32,31 @@
         </form>
     </x-slot>
 </x-tt::modal.dialog>
+
+<x-tt::modal.dialog wire:model="displayOrder">
+    <x-slot name="title">
+        Порядок блоков
+    </x-slot>
+    <x-slot name="content">
+        <x-tt::notifications.error prefix="block-list-" />
+        <x-tt::notifications.success prefix="block-list-" />
+        <x-tt::table drag-root>
+            <x-slot name="body">
+                @if ($blockOrderList)
+                    @foreach($blockOrderList as $key => $item)
+                        <tr drag-item="{{ $item->id }}" drag-item-order="{{ $key }}" wire:key="{{ $item->id }}">
+                            <td class="align-middle border-none !px-0 !py-indent-half">
+                                <div class="flex items-center h-full">
+                                    <x-tt::ico.bars drag-grab class="text-secondary mr-indent cursor-grab" />
+                                    <div>
+                                        {{ $item->title }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </x-slot>
+        </x-tt::table>
+    </x-slot>
+</x-tt::modal.dialog>
