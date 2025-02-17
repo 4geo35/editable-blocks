@@ -20,7 +20,7 @@ class ImageTextWire extends Component
 
     public BlockModelInterface $block;
 
-    public bool $displayDeleteBlock = false;
+    public bool $displayDelete = false;
     public bool $displayData = false;
 
     public int|null $itemId = null;
@@ -132,6 +132,32 @@ class ImageTextWire extends Component
         session()->flash("item-{$this->block->id}-success", "Элемент успешно обновлен");
     }
 
+    public function showDelete(int $id): void
+    {
+        $this->resetFields();
+        $this->itemId = $id;
+        $item = $this->findItem();
+        if (! $item) return;
+
+        $this->displayDelete = true;
+    }
+
+    public function closeDelete(): void
+    {
+        $this->resetFields();
+        $this->displayDelete = false;
+    }
+
+    public function confirmDelete(): void
+    {
+        $item = $this->findItem();
+        if (! $item) return;
+
+        $item->delete();
+        $this->closeDelete();
+        session()->flash("item-{$this->block->id}-success", "Элемент успешно удален");
+    }
+
     protected function findItem(): ?BlockItemModelInterface
     {
         $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
@@ -139,6 +165,7 @@ class ImageTextWire extends Component
         if (! $item) {
             session()->flash("item->{$this->block->id}-error", "Элемент не найден");
             $this->closeData();
+            $this->closeDelete();
             return null;
         }
         return $item;
