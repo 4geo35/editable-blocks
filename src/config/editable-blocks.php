@@ -23,4 +23,9 @@ return [
     "customManageBlocksComponent" => null,
     "customBlockListComponent" => null,
     "customImageTextComponent" => null,
+
+    // Templates
+    "templates" => [
+        "image-text-record" => \GIS\EditableBlocks\Templates\ImageTextRecord::class,
+    ],
 ];

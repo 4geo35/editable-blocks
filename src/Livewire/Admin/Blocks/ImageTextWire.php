@@ -91,22 +91,6 @@ class ImageTextWire extends Component
         session()->flash("item-{$this->block->id}-success", "Элемент успешно добавлен");
     }
 
-    public function showDeleteBlock(): void
-    {
-        $this->displayDeleteBlock = true;
-    }
-
-    public function closeDeleteBlock(): void
-    {
-        $this->displayDeleteBlock = false;
-    }
-
-    public function confirmDeleteBlock(): void
-    {
-        $this->block->delete();
-        $this->dispatch("delete-block", id: $this->block->id);
-    }
-
     protected function resetFields(): void
     {
         $this->reset("itemId", "title", "description", "image", "imageUrl");

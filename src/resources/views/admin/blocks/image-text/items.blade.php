@@ -15,7 +15,26 @@
                 </div>
             </div>
             <div class="card-body">
-                Hello
+                <div class="row">
+                    <div class="col w-full md:w-1/2">
+                        <div class="h-full flex flex-col justify-center">
+                            <h2 class="font-semibold text-2xl mb-indent-half">{{ $item->title }}</h2>
+                            <div class="prose max-w-none">{!! $item->recordable->description !!}</div>
+                        </div>
+                    </div>
+                    <div class="col w-full md:w-1/2">
+                        <a href="{{ route('thumb-img', ['template' => 'original', 'filename' => $item->recordable->image->file_name]) }}"
+                           target="_blank" class="block mr-indent mb-indent basis-auto shrink-0">
+                            <picture>
+                                <img src="{{ route('thumb-img', ['template' => 'image-text-record', 'filename' => $item->recordable->image->file_name]) }}" alt="" class="mb-indent-half rounded-base">
+                            </picture>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-info font-medium mt-indent-half text-xs">
+                    Так как размер сайта и панели администрирования отличаются, здесь показано, как изображение соотносится с текстом и какой оно имеет размер. Также может отличаться стиль и шрифт текста.
+                </div>
             </div>
         </div>
     @endforeach

@@ -26,6 +26,9 @@ class EditableBlocksServiceProvider extends ServiceProvider
         $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
         $blockObserverClass = config("editable-blocks.customBlockModelObserver") ?? BlockObserver::class;
         $blockModelClass::observe($blockObserverClass);
+
+        // Expand configuration
+        $this->expandConfiguration();
     }
 
     public function register(): void
@@ -77,5 +80,17 @@ class EditableBlocksServiceProvider extends ServiceProvider
             $blockActionsManagerClass = config("editable-blocks.customBlockActionsManager") ?? BlockActionsManager::class;
             return new $blockActionsManagerClass;
         });
+    }
+
+    protected function expandConfiguration(): void
+    {
+        $eb = app()->config["editable-blocks"];
+
+        $fa = app()->config["fileable"];
+        $templates = $fa["templates"];
+        foreach ($eb["templates"] as $key => $template) {
+            $templates[$key] = $template;
+        }
+        app()->config["fileable.templates"] = $templates;
     }
 }
