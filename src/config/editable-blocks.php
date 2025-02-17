@@ -19,6 +19,8 @@ return [
     "customBlockModelObserver" => null,
 
     "customBlockItemModel" => null,
+    "customBlockItemModelObserver" => null,
+
     "customSimpleBlockRecordModel" => null,
 
     "customSwitchGroupComponent" => null,

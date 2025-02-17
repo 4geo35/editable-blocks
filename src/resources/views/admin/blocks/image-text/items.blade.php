@@ -1,9 +1,20 @@
 <div class="mx-auto w-11/12 mt-indent-half space-y-indent-half">
-    @foreach($block->items as $item)
+    @foreach($items as $item)
         <div class="card">
             <div class="card-header">
                 <div class="flex items-center justify-between">
-                    <div></div>
+                    <div class="flex justify-start">
+                        <button type="button" class="btn btn-sm btn-primary px-btn-x-ico rounded-e-none"
+                                @if ($loop->last) disabled @endif
+                                wire:click="moveDown({{ $item->id }})">
+                            <x-tt::ico.line-arrow-bottom width="18" height="18" />
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary px-btn-x-ico rounded-s-none"
+                                @if ($loop->first) disabled @endif
+                                wire:click="moveUp({{ $item->id }})">
+                            <x-tt::ico.line-arrow-top width="18" height="18" />
+                        </button>
+                    </div>
                     <div class="flex items-center justify-end ml-indent-half">
                         <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
                                 wire:click="showEdit({{ $item->id }})"

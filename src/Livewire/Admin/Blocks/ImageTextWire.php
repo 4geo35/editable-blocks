@@ -50,7 +50,8 @@ class ImageTextWire extends Component
 
     public function render(): View
     {
-        return view('eb::livewire.admin.blocks.image-text-wire');
+        $items = $this->block->items()->with("recordable")->orderBy("priority")->get();
+        return view('eb::livewire.admin.blocks.image-text-wire', compact("items"));
     }
 
     #[On("update-block-list")]
@@ -130,32 +131,6 @@ class ImageTextWire extends Component
 
         $this->closeData();
         session()->flash("item-{$this->block->id}-success", "Элемент успешно обновлен");
-    }
-
-    public function showDelete(int $id): void
-    {
-        $this->resetFields();
-        $this->itemId = $id;
-        $item = $this->findItem();
-        if (! $item) return;
-
-        $this->displayDelete = true;
-    }
-
-    public function closeDelete(): void
-    {
-        $this->resetFields();
-        $this->displayDelete = false;
-    }
-
-    public function confirmDelete(): void
-    {
-        $item = $this->findItem();
-        if (! $item) return;
-
-        $item->delete();
-        $this->closeDelete();
-        session()->flash("item-{$this->block->id}-success", "Элемент успешно удален");
     }
 
     protected function findItem(): ?BlockItemModelInterface
