@@ -1,4 +1,4 @@
-<div class="mx-auto w-11/12 mt-indent-half space-y-indent-half">
+<div class="mx-auto w-11/12 mt-indent-half space-y-indent-half" x-collapse x-show="expanded">
     @foreach($items as $item)
         <div class="card">
             <div class="card-header">

@@ -1,7 +1,12 @@
 <div class="card">
     <div class="card-header border-b-0 space-y-indent-half">
         <div class="flex justify-between sm:items-center">
-            <h4 class="text-lg font-semibold">Блок "{{ $block->title }}"</h4>
+            <button type="button" class="cursor-pointer hover:text-primary-hover flex items-center" x-on:click="expanded = !expanded">
+                <span class="text-lg font-semibold mr-indent-half inline-block">Блок "{{ $block->title }}"</span>
+                <span class="inline-block" :class="expanded ? 'rotate-180' : ''">
+                        <x-tt::ico.arrow-down />
+                    </span>
+            </button>
             <div class="ml-indent-half flex flex-col sm:flex-row space-x-2">
                 <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x" wire:click="showCreate">
                     <x-tt::ico.circle-plus />
