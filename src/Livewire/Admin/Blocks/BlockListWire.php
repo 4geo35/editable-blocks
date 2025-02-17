@@ -43,7 +43,7 @@ class BlockListWire extends Component
         $this->currentGroup = $key;
     }
 
-    #[On("create-new-block")]
+    #[On("update-block-list")]
     public function updateList(int $id): void
     {
         $this->updatedAt = now()->toString();

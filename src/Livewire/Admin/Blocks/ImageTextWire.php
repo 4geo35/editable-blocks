@@ -5,14 +5,16 @@ namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Interfaces\SimpleBlockRecordModelInterface;
 use GIS\EditableBlocks\Models\SimpleBlockRecord;
+use GIS\EditableBlocks\Traits\EditBlockTrait;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 class ImageTextWire extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, EditBlockTrait;
 
     public BlockModelInterface $block;
 
@@ -46,6 +48,14 @@ class ImageTextWire extends Component
     public function render(): View
     {
         return view('eb::livewire.admin.blocks.image-text-wire');
+    }
+
+    #[On("update-block-list")]
+    public function freshBlock(int $id): void
+    {
+        if ($id == $this->block->id) {
+            $this->block->fresh();
+        }
     }
 
     public function closeData(): void

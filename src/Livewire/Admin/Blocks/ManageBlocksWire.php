@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 
 use GIS\EditableBlocks\Facades\BlockActions;
+use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Models\Block;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -12,11 +13,13 @@ class ManageBlocksWire extends Component
 {
     public string $currentGroup = "";
 
-    public bool $displayCreate = false;
+    public bool $displayDelete = false;
+    public bool $displayData = false;
     public string $type = "";
     public string $typeTitle = "";
 
     public string $title = "";
+    public int|null $blockId = null;
 
     protected function queryString(): array
     {
@@ -65,13 +68,13 @@ class ManageBlocksWire extends Component
     {
         $this->type = $type;
         $this->typeTitle = BlockActions::getTypeTitle($type);
-        $this->displayCreate = true;
+        $this->displayData = true;
     }
 
-    public function closeCreate(): void
+    public function closeData(): void
     {
         $this->resetFields();
-        $this->displayCreate = false;
+        $this->displayData = false;
     }
 
     public function store(): void
@@ -83,19 +86,78 @@ class ManageBlocksWire extends Component
             "type" => $this->type,
             "group" => $this->currentGroup,
         ]);
-        $this->dispatch("create-new-block", id: $block->id);
-        $this->closeCreate();
+        $this->dispatch("update-block-list", id: $block->id);
+        $this->closeData();
         session()->flash("manage-success", "Блок успешно добавлен");
     }
 
-    #[On("delete-block")]
-    public function deletedBlock(int $id): void
+    #[On("show-edit-block")]
+    public function showEdit(int $id): void
     {
+        $this->blockId = $id;
+        $block = $this->findBlock();
+        if (! $block) return;
+
+        $this->displayData = true;
+        $this->title = $block->title;
+        $this->typeTitle = $block->title;
+    }
+
+    public function update(): void
+    {
+        $this->validate();
+        $block = $this->findBlock();
+        if (! $block) return;
+
+        $block->update([
+            "title" => $this->title
+        ]);
+        $this->dispatch("update-block-list", id: $block->id);
+        $this->closeData();
+        session()->flash("manage-success", "Блок успешно обновлен");
+    }
+
+    #[On("show-delete-block")]
+    public function showDelete(int $id): void
+    {
+        $this->blockId = $id;
+        $block = $this->findBlock();
+        if (! $block) return;
+
+        $this->displayDelete = true;
+    }
+
+    public function closeDelete(): void
+    {
+        $this->resetFields();
+        $this->displayDelete = false;
+    }
+
+    public function confirmDelete(): void
+    {
+        $block = $this->findBlock();
+        if (! $block) return;
+
+        $block->delete();
+        $this->dispatch("delete-block", id: $block->id);
+        $this->closeDelete();
         session()->flash("manage-success", "Блок успешно удален");
+    }
+
+    protected function findBlock(): ?BlockModelInterface
+    {
+        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+        $block = $blockModelClass::find($this->blockId);
+        if (! $block) {
+            session()->flash("manage-error", "Блок не найден");
+            $this->closeData();
+            return null;
+        }
+        return $block;
     }
 
     protected function resetFields(): void
     {
-        $this->reset("type", "typeTitle", "title");
+        $this->reset("type", "typeTitle", "title", "blockId");
     }
 }
