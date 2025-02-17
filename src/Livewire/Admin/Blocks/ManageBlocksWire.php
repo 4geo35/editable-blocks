@@ -94,6 +94,7 @@ class ManageBlocksWire extends Component
     #[On("show-edit-block")]
     public function showEdit(int $id): void
     {
+        $this->resetFields();
         $this->blockId = $id;
         $block = $this->findBlock();
         if (! $block) return;
@@ -120,6 +121,7 @@ class ManageBlocksWire extends Component
     #[On("show-delete-block")]
     public function showDelete(int $id): void
     {
+        $this->resetFields();
         $this->blockId = $id;
         $block = $this->findBlock();
         if (! $block) return;

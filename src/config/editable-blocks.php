@@ -14,8 +14,10 @@ return [
     // Admin
     "customAdminBlockController" => null,
     "customBlockActionsManager" => null,
+
     "customBlockModel" => null,
     "customBlockModelObserver" => null,
+
     "customBlockItemModel" => null,
     "customSimpleBlockRecordModel" => null,
 

@@ -3,9 +3,11 @@
         <div class="card">
             <div class="card-header">
                 <div class="flex items-center justify-between">
-                    <h4 class="font-semibold text-xl">{{ $item->title }}</h4>
+                    <div></div>
                     <div class="flex items-center justify-end ml-indent-half">
-                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none">
+                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
+                                wire:click="showEdit({{ $item->id }})"
+                                wire:loading.attr="disabled">
                             <x-tt::ico.edit />
                         </button>
                         <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none">

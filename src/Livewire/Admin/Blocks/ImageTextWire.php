@@ -2,8 +2,10 @@
 
 namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 
+use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Interfaces\SimpleBlockRecordModelInterface;
+use GIS\EditableBlocks\Models\BlockItem;
 use GIS\EditableBlocks\Models\SimpleBlockRecord;
 use GIS\EditableBlocks\Traits\EditBlockTrait;
 use Illuminate\View\View;
@@ -29,10 +31,11 @@ class ImageTextWire extends Component
 
     public function rules(): array
     {
+        $imageRequired = $this->itemId ? "nullable" : "required";
         return [
             "title" => ["required", "string", "max:150"],
             "description" => ["required", "string"],
-            "image" => ["required", "image"],
+            "image" => [$imageRequired, "image"],
         ];
     }
 
@@ -89,6 +92,56 @@ class ImageTextWire extends Component
 
         $this->closeData();
         session()->flash("item-{$this->block->id}-success", "Элемент успешно добавлен");
+    }
+
+    public function showEdit(int $id): void
+    {
+        $this->resetFields();
+        $this->itemId = $id;
+        $item = $this->findItem();
+        if (! $item) return;
+        $record = $item->recordable;
+
+        $this->title = $item->title;
+        $this->description = $record->description;
+        if ($record->image_id) {
+            $record->load("image");
+            $this->imageUrl = $record->image->storage;
+        } else $this->imageUrl = null;
+        $this->displayData = true;
+    }
+
+    public function update(): void
+    {
+        $item = $this->findItem();
+        if (! $item) return;
+        $record = $item->recordable;
+        /**
+         * @var SimpleBlockRecordModelInterface $record
+         */
+        $this->validate();
+        $record->update([
+            "description" => $this->description
+        ]);
+        $record->livewireImage($this->image);
+        $item->update([
+            "title" => $this->title,
+        ]);
+
+        $this->closeData();
+        session()->flash("item-{$this->block->id}-success", "Элемент успешно обновлен");
+    }
+
+    protected function findItem(): ?BlockItemModelInterface
+    {
+        $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
+        $item = $itemModelClass::find($this->itemId);
+        if (! $item) {
+            session()->flash("item->{$this->block->id}-error", "Элемент не найден");
+            $this->closeData();
+            return null;
+        }
+        return $item;
     }
 
     protected function resetFields(): void
