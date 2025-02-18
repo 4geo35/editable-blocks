@@ -6,6 +6,7 @@ use GIS\EditableBlocks\Interfaces\SimpleBlockRecordModelInterface;
 use GIS\EditableBlocks\Traits\ShouldBlockItem;
 use GIS\Fileable\Traits\ShouldImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class SimpleBlockRecord extends Model implements SimpleBlockRecordModelInterface
 {
@@ -14,4 +15,11 @@ class SimpleBlockRecord extends Model implements SimpleBlockRecordModelInterface
     protected $fillable = [
         "description",
     ];
+
+    public function getMarkdownAttribute(): ?string
+    {
+        $value = $this->description;
+        if (! $value) return $value;
+        return Str::markdown($value);
+    }
 }

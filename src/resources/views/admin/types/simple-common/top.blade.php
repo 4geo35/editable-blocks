@@ -3,7 +3,7 @@
         <div class="flex justify-between sm:items-center">
             <button type="button" class="cursor-pointer hover:text-primary-hover flex items-center" x-on:click="expanded = !expanded">
                 <span class="text-lg font-semibold mr-indent-half inline-block">Блок "{{ $block->title }}"</span>
-                <span class="inline-block" :class="expanded ? 'rotate-180' : ''">
+                <span class="inline-block transition-all" :class="expanded ? 'rotate-180' : ''">
                         <x-tt::ico.arrow-down />
                     </span>
             </button>

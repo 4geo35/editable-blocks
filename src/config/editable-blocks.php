@@ -35,5 +35,6 @@ return [
     // Templates
     "templates" => [
         "image-text-record" => \GIS\EditableBlocks\Templates\ImageTextRecord::class,
+        "collapse-record" => \GIS\EditableBlocks\Templates\CollapseRecord::class,
     ],
 ];

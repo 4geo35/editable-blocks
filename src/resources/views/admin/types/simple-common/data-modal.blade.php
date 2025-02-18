@@ -1,8 +1,3 @@
-<x-tt::modal.confirm wire:model="displayDelete">
-    <x-slot name="title">Удалить элемент</x-slot>
-    <x-slot name="text">Будет невозможно восстановить элемент!</x-slot>
-</x-tt::modal.confirm>
-
 <x-tt::modal.dialog wire:model="displayData">
     <x-slot name="title">
         {{ $itemId ? "Редактировать элемент" : "Добавить элемент" }}

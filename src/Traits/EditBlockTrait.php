@@ -3,9 +3,18 @@
 namespace GIS\EditableBlocks\Traits;
 
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
+use Livewire\Attributes\On;
 
 trait EditBlockTrait
 {
+    #[On("update-block-list")]
+    public function freshBlock(int $id): void
+    {
+        if ($id == $this->block->id) {
+            $this->block->fresh();
+        }
+    }
+
     public function fireEdit(): void
     {
         $this->dispatch("show-edit-block", id: $this->block->id);
