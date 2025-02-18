@@ -2,6 +2,7 @@
 
 namespace GIS\EditableBlocks;
 
+use GIS\EditableBlocks\Livewire\Admin\Types\CollapseTextWire;
 use GIS\EditableBlocks\Livewire\Admin\Types\ImageTextWire;
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\BlockListWire;
@@ -78,6 +79,12 @@ class EditableBlocksServiceProvider extends ServiceProvider
         Livewire::component(
             "eb-image-text",
             $component ?? ImageTextWire::class
+        );
+
+        $component = config("editable-blocks.customCollapseTextComponent");
+        Livewire::component(
+            "eb-collapse-text",
+            $component ?? CollapseTextWire::class
         );
     }
 

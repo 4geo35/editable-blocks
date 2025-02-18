@@ -4,10 +4,11 @@ return [
     // Settings
     "availableTypes" => [
         "imageText" => "Текст с изображением",
-//        "collapse" => "Аккордеон",
+        "collapseText" => "Аккордеон",
     ],
     "typeComponents" => [
-        "imageText" => "eb-image-text"
+        "imageText" => "eb-image-text",
+        "collapseText" => "eb-collapse-text",
     ],
     "customTypeComponents" => [],
     "groups" => [],
@@ -29,6 +30,7 @@ return [
     "customBlockListComponent" => null,
 
     "customImageTextComponent" => null,
+    "customCollapseTextComponent" => null,
 
     // Templates
     "templates" => [
