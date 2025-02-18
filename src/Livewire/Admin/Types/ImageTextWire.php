@@ -1,6 +1,6 @@
 <?php
 
-namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
+namespace GIS\EditableBlocks\Livewire\Admin\Types;
 
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
@@ -51,7 +51,7 @@ class ImageTextWire extends Component
     public function render(): View
     {
         $items = $this->block->items()->with("recordable")->orderBy("priority")->get();
-        return view('eb::livewire.admin.blocks.image-text-wire', compact("items"));
+        return view('eb::livewire.admin.types.image-text-wire', compact("items"));
     }
 
     #[On("update-block-list")]

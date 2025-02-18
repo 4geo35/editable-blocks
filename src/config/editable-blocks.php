@@ -4,6 +4,7 @@ return [
     // Settings
     "availableTypes" => [
         "imageText" => "Текст с изображением",
+//        "collapse" => "Аккордеон",
     ],
     "typeComponents" => [
         "imageText" => "eb-image-text"
@@ -26,6 +27,7 @@ return [
     "customSwitchGroupComponent" => null,
     "customManageBlocksComponent" => null,
     "customBlockListComponent" => null,
+
     "customImageTextComponent" => null,
 
     // Templates

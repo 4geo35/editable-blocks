@@ -25,6 +25,8 @@ class BlockObserver
 
     public function deleted(BlockModelInterface $block): void
     {
-        // TODO: clear items
+        foreach ($block->items as $item) {
+            $item->delete();
+        }
     }
 }

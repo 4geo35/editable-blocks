@@ -17,4 +17,10 @@ class BlockItemObserver
         if (empty($priority)) $priority = 0;
         $item->priority = $priority + 1;
     }
+
+    public function deleted(BlockItemModelInterface $item): void
+    {
+        $record = $item->recordable;
+        if (! empty($record)) $record->delete();
+    }
 }
