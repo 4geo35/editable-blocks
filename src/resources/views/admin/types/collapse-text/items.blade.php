@@ -22,7 +22,7 @@
                                 <div class="inline-block w-1/3 float-left mr-indent-half mb-indent-half">
                                     <a href="{{ route('thumb-img', ['template' => 'original', 'filename' => $item->recordable->image->file_name]) }}"
                                        target="_blank" class="block basis-auto shrink-0">
-                                        <picture>
+                                        <picture class="not-prose">
                                             <img src="{{ route('thumb-img', ['template' => 'collapse-record', 'filename' => $item->recordable->image->file_name]) }}" alt=""
                                                  class="rounded-base">
                                         </picture>
