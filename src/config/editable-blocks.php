@@ -3,7 +3,7 @@
 return [
     // Settings
     "availableTypes" => [
-        "imageText" => "Текст с изображением"
+        "imageText" => "Текст с изображением",
     ],
     "typeComponents" => [
         "imageText" => "eb-image-text"
