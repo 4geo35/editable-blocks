@@ -8,15 +8,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <div x-data="{ itemExpanded: true }" class="pt-indent-half px-indent border-t border-b border-secondary">
-                    <div class="flex items-center justify-between mb-indent-half">
+                <div x-data="{ itemExpanded: true }" class="py-indent-half px-indent border-t border-b border-secondary">
+                    <div class="flex items-center justify-between">
                         <h4 class="font-semibold text-lg cursor-pointer hover:text-primary-hover">{{ $item->title }}</h4>
                         <button type="button" class="cursor-pointer hover:text-primary-hover" x-on:click="itemExpanded = ! itemExpanded">
                             <x-eb::ico.open x-show="! itemExpanded" style="display: none" class="transition-all" />
                             <x-eb::ico.close x-show="itemExpanded" class="transition-all" />
                         </button>
                     </div>
-                    <div class="mb-indent-half" x-collapse x-show="itemExpanded">
+                    <div class="" x-collapse x-show="itemExpanded">
                         <div class="prose max-w-none">
                             @if ($item->recordable->image_id)
                                 <div class="inline-block w-1/3 float-left mr-indent-half mb-indent-half">
