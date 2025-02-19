@@ -165,7 +165,7 @@ class ManageBlocksWire extends Component
     {
         $this->resetFields();
         $this->displayOrder = true;
-        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup);
+        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup, $this->model);
         $this->dispatch("update-list");
     }
 
@@ -184,7 +184,7 @@ class ManageBlocksWire extends Component
             $block->priority = $priority;
             $block->save();
         }
-        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup);
+        $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup, $this->model);
         $this->dispatch("update-block-list", id: 0);
         $this->dispatch("update-list");
     }
