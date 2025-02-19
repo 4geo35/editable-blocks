@@ -12,17 +12,19 @@
                     <x-tt::ico.circle-plus />
                     <span class="hidden lg:inline-block pl-btn-ico-text">Добавить элемент</span>
                 </button>
-                <div class="flex items-center">
-                    <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
-                            wire:click="fireEdit">
-                        <x-tt::ico.edit />
-                    </button>
-                    <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
-                            wire:click="fireDelete"
-                            wire:loading.attr="disabled">
-                        <x-tt::ico.trash />
-                    </button>
-                </div>
+                @if (! $block->key)
+                    <div class="flex items-center">
+                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
+                                wire:click="fireEdit">
+                            <x-tt::ico.edit />
+                        </button>
+                        <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
+                                wire:click="fireDelete"
+                                wire:loading.attr="disabled">
+                            <x-tt::ico.trash />
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
         <x-tt::notifications.error prefix="item-{{ $block->id }}-" />

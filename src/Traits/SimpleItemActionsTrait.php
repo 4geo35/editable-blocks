@@ -3,7 +3,6 @@
 namespace GIS\EditableBlocks\Traits;
 
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
-use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Interfaces\SimpleBlockRecordModelInterface;
 use GIS\EditableBlocks\Models\BlockItem;
 use GIS\EditableBlocks\Models\SimpleBlockRecord;
@@ -11,8 +10,6 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 trait SimpleItemActionsTrait
 {
-    public BlockModelInterface $block;
-
     public bool $displayDelete = false;
     public bool $displayData = false;
 

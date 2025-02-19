@@ -3,10 +3,13 @@
 namespace GIS\EditableBlocks\Traits;
 
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
+use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Livewire\Attributes\On;
 
 trait EditBlockTrait
 {
+    public BlockModelInterface $block;
+
     #[On("update-block-list")]
     public function freshBlock(int $id): void
     {

@@ -39,6 +39,8 @@ class BlockActionsManager
         if ($key === "static") return [];
         $groupInfo = config("editable-blocks.groups")[$key];
         $availableTypes = config("editable-blocks.availableTypes");
+        if (! empty(config("editable-blocks.customAvailableTypes")))
+            $availableTypes = array_merge($availableTypes, config("editable-blocks.customAvailableTypes"));
         if (empty($groupInfo["allowedTypes"])) return $availableTypes;
         $array = [];
         foreach ($groupInfo["allowedTypes"] as $allowedType) {
@@ -50,7 +52,10 @@ class BlockActionsManager
 
     public function getTypeTitle(string $key): string
     {
-        if (empty(config("editable-blocks.availableTypes")[$key])) return "";
+        if (empty(config("editable-blocks.availableTypes")[$key])) {
+            if (empty(config("editable-blocks.customAvailableTypes")[$key])) return "";
+            return config("editable-blocks.customAvailableTypes")[$key];
+        }
         return config("editable-blocks.availableTypes")[$key];
     }
 
@@ -61,12 +66,16 @@ class BlockActionsManager
         $query = $blockModelClass::query();
         if ($key === "static") $query->whereNotNull("key");
         else $query->where("group", $key);
+        if ($key === "static") return $query->orderBy("title")->get();
         return $query->orderBy("priority")->get();
     }
 
     public function getComponentByType(string $key): string
     {
-        if (! config("editable-blocks.typeComponents")[$key]) return ""; // TODO: make default component with error
+        if (empty(config("editable-blocks.typeComponents")[$key])) {
+            if (empty(config("editable-blocks.customTypeComponents")[$key])) return ""; // TODO: make default component with error
+            return config("editable-blocks.customTypeComponents")[$key];
+        }
         return config("editable-blocks.typeComponents")[$key];
     }
 }
