@@ -91,11 +91,16 @@ class ManageBlocksWire extends Component
     {
         $this->validate();
         $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
-        $block = $blockModelClass::create([
+        $blockData = [
             "title" => $this->title,
             "type" => $this->type,
-            "group" => $this->currentGroup,
-        ]);
+        ];
+        if ($this->model)
+            $block = $this->model->blocks()->create($blockData);
+        else {
+            $blockData["group"] = $this->currentGroup;
+            $block = $blockModelClass::create($blockData);
+        }
         $this->dispatch("update-block-list", id: $block->id);
         $this->closeData();
         session()->flash("manage-success", "Блок успешно добавлен");

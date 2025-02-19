@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 
 use GIS\EditableBlocks\Facades\BlockActions;
+use GIS\EditableBlocks\Interfaces\ShouldBlocksInterface;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -10,6 +11,7 @@ use Livewire\Component;
 class BlockListWire extends Component
 {
     public string $currentGroup = "";
+    public ShouldBlocksInterface|null $model = null;
     public string $updatedAt = "";
 
     protected function queryString(): array
@@ -22,7 +24,9 @@ class BlockListWire extends Component
     public function mount(): void
     {
         $this->updatedAt = now()->toString();
-        if (empty($this->currentGroup)) {
+        if ($this->model) {
+            $this->setGroup("model");
+        } elseif (empty($this->currentGroup)) {
             $buttons = BlockActions::getGroupButtons();
             if (! empty($buttons)) {
                 $this->setGroup($buttons[0]->key);
@@ -32,7 +36,7 @@ class BlockListWire extends Component
 
     public function render(): View
     {
-        $blocks = BlockActions::getBlocksByGroup($this->currentGroup);
+        $blocks = BlockActions::getBlocksByGroup($this->currentGroup, $this->model);
         $updatedTime = $this->updatedAt;
         return view('eb::livewire.admin.blocks.block-list-wire', compact("blocks", "updatedTime"));
     }

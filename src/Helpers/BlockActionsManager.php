@@ -71,13 +71,18 @@ class BlockActionsManager
         return config("editable-blocks.availableTypes")[$key];
     }
 
-    public function getBlocksByGroup(string $key): ?Collection
+    public function getBlocksByGroup(string $key, ShouldBlocksInterface $model = null): ?Collection
     {
+        if ($model && ! $this->checkIfModelExists($model)) return null;
         if (! $this->checkIfGroupExists($key)) return null;
-        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
-        $query = $blockModelClass::query();
+
+        if ($model) $query = $model->blocks();
+        else {
+            $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+            $query = $blockModelClass::query();
+        }
         if ($key === "static") $query->whereNotNull("key");
-        else $query->where("group", $key);
+        elseif (! $model) $query->where("group", $key);
         if ($key === "static") return $query->orderBy("title")->get();
         return $query->orderBy("priority")->get();
     }

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool checkIfGroupExists(string $key)
  * @method static array getAvailableBlocks(string $key, ShouldBlocksInterface $model = null)
  * @method static string getTypeTitle(string $key)
- * @method static Collection|null getBlocksByGroup(string $key)
+ * @method static Collection|null getBlocksByGroup(string $key, ShouldBlocksInterface $model = null)
  * @method static string getComponentByType(string $key)
  *
  * @see BlockActionsManager
