@@ -10,8 +10,12 @@
             <div class="card-body">
                 <div x-data="{ itemExpanded: true }" class="py-indent-half px-indent border-t border-b border-secondary">
                     <div class="flex items-center justify-between">
-                        <h4 class="font-semibold text-lg cursor-pointer hover:text-primary-hover">{{ $item->title }}</h4>
-                        <button type="button" class="cursor-pointer hover:text-primary-hover" x-on:click="itemExpanded = ! itemExpanded">
+                        <h4 class="font-semibold text-lg cursor-pointer hover:text-primary-hover"
+                            x-on:click="itemExpanded = ! itemExpanded">
+                            {{ $item->title }}
+                        </h4>
+                        <button type="button" class="cursor-pointer hover:text-primary-hover"
+                                x-on:click="itemExpanded = ! itemExpanded">
                             <x-eb::ico.open x-show="! itemExpanded" style="display: none" class="transition-all" />
                             <x-eb::ico.close x-show="itemExpanded" class="transition-all" />
                         </button>
