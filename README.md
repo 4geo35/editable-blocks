@@ -37,3 +37,16 @@
             "type" => "collapseText",
         ],
     ],
+
+Параметр `models` отвечает за блоки прикрепленные к модели. Модель должна реализовывать `ShouldBlocksInterface`, все необходимое есть в `ShouldBlocks`. По умолчанию группой для модели является ее таблица, но можно поменять это переопределив метод `getBlockGroupAttribute`. Если нет ограничений на типы блоков, можно оставить пустой массив для модели.
+
+    "models" => [
+        "examples" => [
+            "allowedTypes" => ["collapseText", "imageText"],
+        ],
+    ],
+
+Что бы вывести блоки на страницу редактирования модели достаточно добавить два компонента:
+
+    <livewire:eb-manage-blocks :model="$example" />
+    <livewire:eb-block-list :model="$example" />
