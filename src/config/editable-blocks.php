@@ -14,6 +14,7 @@ return [
     "customTypeComponents" => [],
     "groups" => [],
     "static" => [],
+    "models" => [],
     // Admin
     "customAdminBlockController" => null,
     "customBlockActionsManager" => null,

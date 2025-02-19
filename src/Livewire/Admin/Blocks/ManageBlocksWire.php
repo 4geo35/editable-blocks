@@ -4,6 +4,7 @@ namespace GIS\EditableBlocks\Livewire\Admin\Blocks;
 
 use GIS\EditableBlocks\Facades\BlockActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
+use GIS\EditableBlocks\Interfaces\ShouldBlocksInterface;
 use GIS\EditableBlocks\Models\Block;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
@@ -14,6 +15,7 @@ class ManageBlocksWire extends Component
 {
     public bool $hasSearch = false;
     public string $currentGroup = "";
+    public ShouldBlocksInterface|null $model = null;
 
     public bool $displayDelete = false;
     public bool $displayData = false;
@@ -36,7 +38,9 @@ class ManageBlocksWire extends Component
 
     public function mount(): void
     {
-        if (empty($this->currentGroup)) {
+        if ($this->model) {
+            $this->setGroup("model");
+        } elseif (empty($this->currentGroup)) {
             $buttons = BlockActions::getGroupButtons();
             if (! empty($buttons)) {
                 $this->setGroup($buttons[0]->key);
@@ -60,7 +64,7 @@ class ManageBlocksWire extends Component
 
     public function render(): View
     {
-        $blockList = BlockActions::getAvailableBlocks($this->currentGroup);
+        $blockList = BlockActions::getAvailableBlocks($this->currentGroup, $this->model);
         return view('eb::livewire.admin.blocks.manage-blocks-wire', compact("blockList"));
     }
 

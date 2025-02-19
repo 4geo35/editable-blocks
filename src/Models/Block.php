@@ -6,6 +6,7 @@ use GIS\EditableBlocks\Facades\BlockActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Block extends Model implements BlockModelInterface
 {
@@ -20,6 +21,11 @@ class Block extends Model implements BlockModelInterface
     {
         $blockItemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
         return $this->hasMany($blockItemModelClass);
+    }
+
+    public function editable(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     public function getTypeComponentAttribute(): string
