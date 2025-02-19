@@ -6,11 +6,12 @@ return [
         "imageText" => "Текст с изображением",
         "collapseText" => "Аккордеон",
     ],
+    "customAvailableTypes" => [], // TODO: add to render
     "typeComponents" => [
         "imageText" => "eb-image-text",
         "collapseText" => "eb-collapse-text",
     ],
-    "customTypeComponents" => [],
+    "customTypeComponents" => [], // TODO: add to render
     "groups" => [],
     "static" => [],
     // Admin

@@ -2,6 +2,7 @@
 
 namespace GIS\EditableBlocks;
 
+use GIS\EditableBlocks\Commands\CreateBlocksCommand;
 use GIS\EditableBlocks\Livewire\Admin\Types\CollapseTextWire;
 use GIS\EditableBlocks\Livewire\Admin\Types\ImageTextWire;
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
@@ -51,6 +52,13 @@ class EditableBlocksServiceProvider extends ServiceProvider
 
         // Facades
         $this->initFacades();
+
+        // Commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateBlocksCommand::class,
+            ]);
+        }
     }
 
     protected function addLivewireComponents(): void
