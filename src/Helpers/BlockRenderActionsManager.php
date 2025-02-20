@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Cache;
 
 class BlockRenderActionsManager
 {
+    public function getComponentByType(string $key): string
+    {
+        if (empty(config("editable-blocks.typeRenderComponents")[$key])) {
+            if (empty(config("editable-blocks.customTypeRenderComponents")[$key])) return ""; // TODO: make default component with error
+            return config("editable-blocks.customTypeRenderComponents")[$key];
+        }
+        return config("editable-blocks.typeRenderComponents")[$key];
+    }
+
     public function getByKey(string $key): ?BlockModelInterface
     {
         $cacheKey = "static-block:{$key}";

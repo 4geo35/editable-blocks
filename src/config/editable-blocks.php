@@ -12,6 +12,11 @@ return [
         "collapseText" => "eb-collapse-text",
     ],
     "customTypeComponents" => [],
+    "typeRenderComponents" => [
+        "imageText" => "eb::types.image-text",
+        "collapseText" => "eb::types.collapse-text",
+    ],
+    "customTypeRenderComponents" => [],
     "groups" => [],
     "static" => [],
     "models" => [],
@@ -41,6 +46,8 @@ return [
     "templates" => [
         "image-text-record" => \GIS\EditableBlocks\Templates\ImageTextRecord::class,
         "collapse-record" => \GIS\EditableBlocks\Templates\CollapseRecord::class,
+        "collapse-record-tablet" => \GIS\EditableBlocks\Templates\CollapseRecordTablet::class,
+        "collapse-record-mobile" => \GIS\EditableBlocks\Templates\CollapseRecordMobile::class,
     ],
 
     // Policy

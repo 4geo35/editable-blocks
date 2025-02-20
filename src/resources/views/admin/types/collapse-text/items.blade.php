@@ -21,14 +21,16 @@
                         </button>
                     </div>
                     <div class="" x-collapse x-show="itemExpanded">
-                        <div class="prose max-w-none">
+                        <div class="prose max-w-none prose-p:leading-6">
                             @if ($item->recordable->image_id)
-                                <div class="inline-block w-1/3 float-left mr-indent-half mb-indent-half">
+                                @php($fileName = $item->recordable->image->file_name)
+                                <div class="inline-block w-full md:w-5/12 float-left mr-indent-half mb-indent-half">
                                     <a href="{{ route('thumb-img', ['template' => 'original', 'filename' => $item->recordable->image->file_name]) }}"
                                        target="_blank" class="block basis-auto shrink-0">
                                         <picture class="not-prose">
-                                            <img src="{{ route('thumb-img', ['template' => 'collapse-record', 'filename' => $item->recordable->image->file_name]) }}" alt=""
-                                                 class="rounded-base">
+                                            <source media="(min-width: 1024px)" srcset="{{ route('thumb-img', ['template' => 'collapse-record', 'filename' => $fileName]) }}">
+                                            <source media="(min-width: 480px)" srcset="{{ route('thumb-img', ['template' => 'collapse-record-tablet', 'filename' => $fileName]) }}">
+                                            <img src="{{ route('thumb-img', ['template' => 'collapse-record-mobile', 'filename' => $fileName]) }}" alt="" class="rounded-base">
                                         </picture>
                                     </a>
                                 </div>

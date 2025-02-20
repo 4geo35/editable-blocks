@@ -7,6 +7,7 @@ use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Illuminate\Support\Facades\Facade;
 
 /**
+ * @method static string getComponentByType(string $key)
  * @method static BlockModelInterface|null getByKey(string $key)
  * @method static void forgetByKey(string $key)
  *

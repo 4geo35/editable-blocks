@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Models;
 
 use GIS\EditableBlocks\Facades\BlockActions;
+use GIS\EditableBlocks\Facades\BlockRenderActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,5 +32,10 @@ class Block extends Model implements BlockModelInterface
     public function getTypeComponentAttribute(): string
     {
         return BlockActions::getComponentByType($this->type);
+    }
+
+    public function getRenderTypeComponentAttribute(): string
+    {
+        return BlockRenderActions::getComponentByType($this->type);
     }
 }
