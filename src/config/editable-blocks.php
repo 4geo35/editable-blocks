@@ -45,6 +45,9 @@ return [
     // Templates
     "templates" => [
         "image-text-record" => \GIS\EditableBlocks\Templates\ImageTextRecord::class,
+        "image-text-record-tablet" => \GIS\EditableBlocks\Templates\ImageTextRecordTablet::class,
+        "image-text-record-mobile" => \GIS\EditableBlocks\Templates\ImageTextRecordMobile::class,
+
         "collapse-record" => \GIS\EditableBlocks\Templates\CollapseRecord::class,
         "collapse-record-tablet" => \GIS\EditableBlocks\Templates\CollapseRecordTablet::class,
         "collapse-record-mobile" => \GIS\EditableBlocks\Templates\CollapseRecordMobile::class,

@@ -6,10 +6,10 @@ namespace GIS\EditableBlocks\Templates;
 use Intervention\Image\Interfaces\ImageInterface;
 use Intervention\Image\Interfaces\ModifierInterface;
 
-class CollapseRecordMobile implements ModifierInterface
+class ImageTextRecordMobile implements ModifierInterface
 {
     public function apply(ImageInterface $image): ImageInterface
     {
-        return $image->cover(408, 240);
+        return $image->cover(456, 280);
     }
 }
