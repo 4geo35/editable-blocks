@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks;
 
 use GIS\EditableBlocks\Commands\CreateBlocksCommand;
+use GIS\EditableBlocks\Helpers\BlockRenderActionsManager;
 use GIS\EditableBlocks\Livewire\Admin\Types\CollapseTextWire;
 use GIS\EditableBlocks\Livewire\Admin\Types\ImageTextWire;
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
@@ -103,6 +104,10 @@ class EditableBlocksServiceProvider extends ServiceProvider
         $this->app->singleton("block-actions", function () {
             $blockActionsManagerClass = config("editable-blocks.customBlockActionsManager") ?? BlockActionsManager::class;
             return new $blockActionsManagerClass;
+        });
+        $this->app->singleton("block-render-actions", function () {
+            $blockRenderActionsManagerClass = config("editable-blocks.customBlockRenderActionsManager") ?? BlockRenderActionsManager::class;
+            return new $blockRenderActionsManagerClass;
         });
     }
 
