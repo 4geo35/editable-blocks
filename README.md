@@ -12,6 +12,35 @@
 
     import "fslightbox"
 
+### Вывод
+
+Что бы вывести созданные блоки на сайт, фасад который кэширует данные:
+
+    $contactsData = BlockRenderActions::getByKey('contacts');
+    $benefitsData = BlockRenderActions::getByKey("benefits");
+
+    $aboutData = BlockRenderActions::getByGroup("about");
+
+    $example = Example::query()->first();
+    $exampleData = BlockRenderActions::getByModel($example);
+
+Компоненты для вывода на сайт:
+    
+    @if ($exampleData)
+        @foreach($exampleData as $block)
+            <x-dynamic-component :component="$block->render_type_component" :block="$block" class="mb-indent" />
+        @endforeach
+    @endif
+
+    @if ($aboutData)
+        @foreach($aboutData as $block)
+            <x-dynamic-component :component="$block->render_type_component" :block="$block" class="mb-indent" />
+        @endforeach
+    @endif
+
+    <x-dynamic-component :component="$contactsData->render_type_component" :block="$contactsData" class="mb-indent" />
+    <x-dynamic-component :component="$benefitsData->render_type_component" :block="$benefitsData" class="mb-indent" />
+    
 
 ### Настройка
 
