@@ -6,6 +6,7 @@ use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Interfaces\SimpleBlockRecordModelInterface;
 use GIS\EditableBlocks\Models\Block;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 
@@ -47,6 +48,37 @@ class BlockRenderActionsManager
     public function forgetByKey(string $key): void
     {
         Cache::forget("static-block:{$key}");
+    }
+
+    public function getByGroup(string $key): ?Collection
+    {
+        $cacheKey = "group-block:{$key}";
+        return Cache::rememberForever($cacheKey, function () use ($key) {
+            $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+            $query = $blockModelClass::query();
+            $query->with([
+                "items" => function (HasMany $many) {
+                    $many->with("recordable");
+                    $many->orderBy("priority");
+                }
+            ]);
+            $query->where("group", $key);
+            $blocks = $query->orderBy("priority")->get();
+            if (! $blocks->count()) return null;
+
+            foreach ($blocks as $block) {
+                foreach ($block->items as $item) {
+                    $this->callExpandRecordable($item);
+                }
+            }
+
+            return $blocks;
+        });
+    }
+
+    public function forgetByGroup(string $key): void
+    {
+        Cache::forget("group-block:{$key}");
     }
 
     protected function callExpandRecordable(BlockItemModelInterface $item): void

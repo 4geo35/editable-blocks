@@ -40,5 +40,6 @@ class BlockObserver
     protected function forgetCache(BlockModelInterface $block): void
     {
         if (! empty($block->key)) BlockRenderActions::forgetByKey($block->key);
+        if (! empty($block->group)) BlockRenderActions::forgetByGroup($block->group);
     }
 }

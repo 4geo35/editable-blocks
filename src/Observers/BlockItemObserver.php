@@ -41,5 +41,6 @@ class BlockItemObserver
         $block = $item->block;
         if (empty($block)) return;
         if ($block->key) BlockRenderActions::forgetByKey($block->key);
+        if ($block->group) BlockRenderActions::forgetByGroup($block->group);
     }
 }
