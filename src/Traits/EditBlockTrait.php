@@ -34,6 +34,7 @@ trait EditBlockTrait
         $this->itemId = $id;
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("delete", true)) return;
 
         $this->displayDelete = true;
     }
@@ -48,6 +49,7 @@ trait EditBlockTrait
     {
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("delete", true)) return;
 
         $item->delete();
         $this->closeDelete();
@@ -59,6 +61,7 @@ trait EditBlockTrait
         $this->itemId = $itemId;
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("order")) return;
 
         $previous = $this->block->items()
             ->where("priority", "<", $item->priority)
@@ -73,6 +76,7 @@ trait EditBlockTrait
         $this->itemId = $itemId;
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("order")) return;
 
         $previous = $this->block->items()
             ->where("priority", ">", $item->priority)

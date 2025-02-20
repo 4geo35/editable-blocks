@@ -8,10 +8,14 @@
                     </span>
             </button>
             <div class="ml-indent-half flex flex-col sm:flex-row space-x-2">
-                <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x" wire:click="showCreate">
-                    <x-tt::ico.circle-plus />
-                    <span class="hidden lg:inline-block pl-btn-ico-text">Добавить элемент</span>
-                </button>
+                @can("create", $block::class)
+                    <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x"
+                            wire:loading.attr="disabled"
+                            wire:click="showCreate">
+                        <x-tt::ico.circle-plus />
+                        <span class="hidden lg:inline-block pl-btn-ico-text">Добавить элемент</span>
+                    </button>
+                @endcan
                 @if (! $block->key)
                     <div class="flex items-center">
                         <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"

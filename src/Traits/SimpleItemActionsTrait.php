@@ -28,11 +28,13 @@ trait SimpleItemActionsTrait
     public function showCreate(): void
     {
         $this->resetFields();
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("create")) return;
         $this->displayData = true;
     }
 
     public function store(): void
     {
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("create")) return;
         $this->validate();
 
         $simpleRecordModelClass = config("editable-blocks.customSimpleBlockRecordModel") ?? SimpleBlockRecord::class;
@@ -58,6 +60,7 @@ trait SimpleItemActionsTrait
         $this->itemId = $id;
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $record = $item->recordable;
 
         $this->title = $item->title;
@@ -73,6 +76,7 @@ trait SimpleItemActionsTrait
     {
         $item = $this->findItem();
         if (! $item) return;
+        if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $record = $item->recordable;
         /**
          * @var SimpleBlockRecordModelInterface $record

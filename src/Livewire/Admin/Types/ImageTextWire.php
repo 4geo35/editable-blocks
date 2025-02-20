@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Livewire\Admin\Types;
 
 use GIS\EditableBlocks\Interfaces\SimpleItemActionsInterface;
+use GIS\EditableBlocks\Traits\CheckBlockAuthTrait;
 use GIS\EditableBlocks\Traits\EditBlockTrait;
 use GIS\EditableBlocks\Traits\SimpleItemActionsTrait;
 use Illuminate\View\View;
@@ -11,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class ImageTextWire extends Component implements SimpleItemActionsInterface
 {
-    use WithFileUploads, EditBlockTrait, SimpleItemActionsTrait;
+    use WithFileUploads, EditBlockTrait, SimpleItemActionsTrait, CheckBlockAuthTrait;
 
     public function rules(): array
     {
