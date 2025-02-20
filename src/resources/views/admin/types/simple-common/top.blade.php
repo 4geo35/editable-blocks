@@ -15,12 +15,17 @@
                 @if (! $block->key)
                     <div class="flex items-center">
                         <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
+                                @cannot("update", $block) disabled
+                                @else wire:loading.attr="disabled"
+                                @endcannot
                                 wire:click="fireEdit">
                             <x-tt::ico.edit />
                         </button>
                         <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
-                                wire:click="fireDelete"
-                                wire:loading.attr="disabled">
+                                @cannot("delete", $block) disabled
+                                @else wire:loading.attr="disabled"
+                                @endcannot
+                                wire:click="fireDelete">
                             <x-tt::ico.trash />
                         </button>
                     </div>

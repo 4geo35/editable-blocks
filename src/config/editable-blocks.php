@@ -39,4 +39,9 @@ return [
         "image-text-record" => \GIS\EditableBlocks\Templates\ImageTextRecord::class,
         "collapse-record" => \GIS\EditableBlocks\Templates\CollapseRecord::class,
     ],
+
+    // Policy
+    "blockPolicyTitle" => "Управление блоками",
+    "blockPolicy" => \GIS\EditableBlocks\Policies\BlockPolicy::class,
+    "blockPolicyKey" => "blocks",
 ];

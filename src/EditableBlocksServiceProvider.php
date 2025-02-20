@@ -13,11 +13,13 @@ use GIS\EditableBlocks\Models\Block;
 use GIS\EditableBlocks\Models\BlockItem;
 use GIS\EditableBlocks\Observers\BlockItemObserver;
 use GIS\EditableBlocks\Observers\BlockObserver;
+use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 class EditableBlocksServiceProvider extends ServiceProvider
 {
+    use ExpandTemplatesTrait;
     public function boot(): void
     {
         // Views
@@ -107,12 +109,15 @@ class EditableBlocksServiceProvider extends ServiceProvider
     protected function expandConfiguration(): void
     {
         $eb = app()->config["editable-blocks"];
+        $this->expandTemplates($eb);
 
-        $fa = app()->config["fileable"];
-        $templates = $fa["templates"];
-        foreach ($eb["templates"] as $key => $template) {
-            $templates[$key] = $template;
-        }
-        app()->config["fileable.templates"] = $templates;
+        $um = app()->config["user-management"];
+        $permissions = $um["permissions"];
+        $permissions[] = [
+            "title" => $eb["blockPolicyTitle"],
+            "key" => $eb["blockPolicyKey"],
+            "policy" => $eb["blockPolicy"],
+        ];
+        app()->config["user-management.permissions"] = $permissions;
     }
 }

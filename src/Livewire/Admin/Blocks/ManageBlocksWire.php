@@ -76,6 +76,9 @@ class ManageBlocksWire extends Component
 
     public function showCreate(string $type): void
     {
+        $this->resetFields();
+        if (! $this->checkAuth("create")) return;
+
         $this->type = $type;
         $this->typeTitle = BlockActions::getTypeTitle($type);
         $this->displayData = true;
@@ -89,7 +92,9 @@ class ManageBlocksWire extends Component
 
     public function store(): void
     {
+        if (! $this->checkAuth("create")) return;
         $this->validate();
+
         $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
         $blockData = [
             "title" => $this->title,
@@ -113,6 +118,7 @@ class ManageBlocksWire extends Component
         $this->blockId = $id;
         $block = $this->findBlock();
         if (! $block) return;
+        if (! $this->checkAuth("update", $block)) return;
 
         $this->displayData = true;
         $this->title = $block->title;
@@ -121,9 +127,10 @@ class ManageBlocksWire extends Component
 
     public function update(): void
     {
-        $this->validate();
         $block = $this->findBlock();
         if (! $block) return;
+        if (! $this->checkAuth("update", $block)) return;
+        $this->validate();
 
         $block->update([
             "title" => $this->title
@@ -140,6 +147,7 @@ class ManageBlocksWire extends Component
         $this->blockId = $id;
         $block = $this->findBlock();
         if (! $block) return;
+        if (! $this->checkAuth("delete", $block)) return;
 
         $this->displayDelete = true;
     }
@@ -154,6 +162,7 @@ class ManageBlocksWire extends Component
     {
         $block = $this->findBlock();
         if (! $block) return;
+        if (! $this->checkAuth("delete", $block)) return;
 
         $block->delete();
         $this->dispatch("delete-block", id: $block->id);
@@ -164,6 +173,7 @@ class ManageBlocksWire extends Component
     public function showOrder(): void
     {
         $this->resetFields();
+        if (! $this->checkAuth("order")) return;
         $this->displayOrder = true;
         $this->blockOrderList = BlockActions::getBlocksByGroup($this->currentGroup, $this->model);
         $this->dispatch("update-list");
@@ -177,6 +187,7 @@ class ManageBlocksWire extends Component
 
     public function reorderItems(array $newOrder): void
     {
+        if (! $this->checkAuth("order")) return;
         foreach ($newOrder as $priority => $id) {
             $this->blockId = $id;
             $block = $this->findBlock();
@@ -204,5 +215,20 @@ class ManageBlocksWire extends Component
     protected function resetFields(): void
     {
         $this->reset("type", "typeTitle", "title", "blockId", "blockOrderList");
+    }
+
+    protected function checkAuth(string $action, BlockModelInterface $block = null): bool
+    {
+        try {
+            $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+            $this->authorize($action, $block ?? $blockModelClass);
+            return true;
+        } catch (\Exception $exception) {
+            session()->flash("manage-error", "Неавторизованное действие");
+            $this->closeData();
+            $this->closeDelete();
+            $this->closeOrder();
+            return false;
+        }
     }
 }

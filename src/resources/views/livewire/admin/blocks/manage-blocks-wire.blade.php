@@ -4,7 +4,11 @@
             <div class="card-header">
                 <div class="flex justify-between">
                     <h2 class="font-medium text-2xl">Добавить блок</h2>
-                    <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x" wire:click="showOrder">
+                    <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x"
+                            @cannot("order", config("editable-blocks.customBlockModel") ?? \GIS\EditableBlocks\Models\Block::class) disabled
+                            @else wire:loading.attr="disabled"
+                            @endcannot
+                            wire:click="showOrder">
                         <x-tt::ico.bars />
                         <span class="hidden lg:inline-block pl-btn-ico-text">Порядок</span>
                     </button>
@@ -19,6 +23,9 @@
                         @foreach($blockList as $type => $title)
                             <button type="button"
                                     class="btn btn-primary my-1 sm:mr-indent-half"
+                                    @cannot("create", config("editable-blocks.customBlockModel") ?? \GIS\EditableBlocks\Models\Block::class) disabled
+                                    @else wire:loading.attr="disabled"
+                                    @endcannot
                                     wire:click="showCreate('{{ $type }}')">
                                 {{ $title }}
                             </button>
