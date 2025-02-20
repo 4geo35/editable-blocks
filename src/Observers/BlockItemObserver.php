@@ -40,7 +40,8 @@ class BlockItemObserver
     {
         $block = $item->block;
         if (empty($block)) return;
-        if ($block->key) BlockRenderActions::forgetByKey($block->key);
-        if ($block->group) BlockRenderActions::forgetByGroup($block->group);
+        if (! empty($block->key)) BlockRenderActions::forgetByKey($block->key);
+        if (! empty($block->group)) BlockRenderActions::forgetByGroup($block->group);
+        if (! empty($block->editable)) BlockRenderActions::forgetByModel($block->editable);
     }
 }

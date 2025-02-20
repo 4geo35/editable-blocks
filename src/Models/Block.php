@@ -6,6 +6,7 @@ use GIS\EditableBlocks\Facades\BlockActions;
 use GIS\EditableBlocks\Facades\BlockRenderActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 

@@ -41,5 +41,6 @@ class BlockObserver
     {
         if (! empty($block->key)) BlockRenderActions::forgetByKey($block->key);
         if (! empty($block->group)) BlockRenderActions::forgetByGroup($block->group);
+        if (! empty($block->editable)) BlockRenderActions::forgetByModel($block->editable);
     }
 }
