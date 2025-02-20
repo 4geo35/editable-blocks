@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static BlockModelInterface|null getByKey(string $key)
+ * @method static void forgetByKey(string $key)
  *
  * @see BlockRenderActionsManager
  */

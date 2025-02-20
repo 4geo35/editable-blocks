@@ -12,8 +12,10 @@ use GIS\EditableBlocks\Livewire\Admin\Blocks\ManageBlocksWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\SwitchGroupWire;
 use GIS\EditableBlocks\Models\Block;
 use GIS\EditableBlocks\Models\BlockItem;
+use GIS\EditableBlocks\Models\SimpleBlockRecord;
 use GIS\EditableBlocks\Observers\BlockItemObserver;
 use GIS\EditableBlocks\Observers\BlockObserver;
+use GIS\EditableBlocks\Observers\SimpleBlockRecordObserver;
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -37,6 +39,10 @@ class EditableBlocksServiceProvider extends ServiceProvider
         $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
         $itemObserverClass = config("editable-blocks.customBlockItemModelObserver") ?? BlockItemObserver::class;
         $itemModelClass::observe($itemObserverClass);
+
+        $simpleRecordClass = config("editable-config.customSimpleBlockRecordModel") ?? SimpleBlockRecord::class;
+        $simpleRecordObserverClass = config("editable-config.customSimpleBlockRecordObserver") ?? SimpleBlockRecordObserver::class;
+        $simpleRecordClass::observe($simpleRecordObserverClass);
 
         // Expand configuration
         $this->expandConfiguration();

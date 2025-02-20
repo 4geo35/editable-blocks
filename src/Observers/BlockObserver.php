@@ -3,6 +3,7 @@
 namespace GIS\EditableBlocks\Observers;
 
 use GIS\EditableBlocks\Facades\BlockActions;
+use GIS\EditableBlocks\Facades\BlockRenderActions;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use GIS\EditableBlocks\Models\Block;
 
@@ -23,10 +24,21 @@ class BlockObserver
         $block->priority = $priority + 1;
     }
 
+    public function updating(BlockModelInterface $block): void
+    {
+        $this->forgetCache($block);
+    }
+
     public function deleted(BlockModelInterface $block): void
     {
         foreach ($block->items as $item) {
             $item->delete();
         }
+        $this->forgetCache($block);
+    }
+
+    protected function forgetCache(BlockModelInterface $block): void
+    {
+        if (! empty($block->key)) BlockRenderActions::forgetByKey($block->key);
     }
 }

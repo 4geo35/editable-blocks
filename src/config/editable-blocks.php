@@ -15,6 +15,7 @@ return [
     "groups" => [],
     "static" => [],
     "models" => [],
+    "expandRender" => [],
     // Admin
     "customAdminBlockController" => null,
     "customBlockActionsManager" => null,
@@ -27,6 +28,7 @@ return [
     "customBlockItemModelObserver" => null,
 
     "customSimpleBlockRecordModel" => null,
+    "customSimpleBlockRecordModelObserver" => null,
 
     "customSwitchGroupComponent" => null,
     "customManageBlocksComponent" => null,
