@@ -25,6 +25,7 @@ class ManageBlocksWire extends Component
     public string $typeTitle = "";
 
     public string $title = "";
+    public string $renderTitle = "";
     public int|null $blockId = null;
 
     public Collection|null $blockOrderList = null;
@@ -51,14 +52,16 @@ class ManageBlocksWire extends Component
     public function rules(): array
     {
         return [
-            "title" => ["nullable", "string", "max:150"]
+            "title" => ["nullable", "string", "max:150"],
+            "renderTitle" => ["nullable", "string", "max:150"],
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            "title" => "Заголовок"
+            "title" => "Заголовок",
+            "renderTitle" => "Отображаемый заголовок",
         ];
     }
 
@@ -98,6 +101,7 @@ class ManageBlocksWire extends Component
         $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
         $blockData = [
             "title" => $this->title,
+            "render_title" => $this->renderTitle,
             "type" => $this->type,
         ];
         if ($this->model)
@@ -122,6 +126,7 @@ class ManageBlocksWire extends Component
 
         $this->displayData = true;
         $this->title = $block->title;
+        $this->renderTitle = $block->render_title ?? "";
         $this->typeTitle = $block->title;
     }
 
@@ -133,7 +138,8 @@ class ManageBlocksWire extends Component
         $this->validate();
 
         $block->update([
-            "title" => $this->title
+            "title" => $this->title,
+            "render_title" => $this->renderTitle,
         ]);
         $this->dispatch("update-block-list", id: $block->id);
         $this->closeData();
@@ -214,7 +220,7 @@ class ManageBlocksWire extends Component
 
     protected function resetFields(): void
     {
-        $this->reset("type", "typeTitle", "title", "blockId", "blockOrderList");
+        $this->reset("type", "typeTitle", "title", "renderTitle", "blockId", "blockOrderList");
     }
 
     protected function checkAuth(string $action, BlockModelInterface $block = null): bool

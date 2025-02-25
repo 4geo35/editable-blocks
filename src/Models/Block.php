@@ -14,6 +14,7 @@ class Block extends Model implements BlockModelInterface
 {
     protected $fillable = [
         "title",
+        "render_title",
         "type",
         "group",
         "key",

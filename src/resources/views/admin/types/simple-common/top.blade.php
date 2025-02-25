@@ -3,9 +3,10 @@
         <div class="flex justify-between sm:items-center">
             <button type="button" class="cursor-pointer hover:text-primary-hover flex items-center" x-on:click="expanded = !expanded">
                 <span class="text-lg font-semibold mr-indent-half inline-block">Блок "{{ $block->title }}"</span>
-                <span class="inline-block transition-all" :class="expanded ? 'rotate-180' : ''">
-                        <x-tt::ico.arrow-down />
-                    </span>
+                @if ($block->render_title)
+                    <span class="text-sm text-secondary font-semibold mr-indent-half inline-block">({{ $block->render_title }})</span>
+                @endif
+                <span class="inline-block transition-all" :class="expanded ? 'rotate-180' : ''"><x-tt::ico.arrow-down /></span>
             </button>
             <div class="ml-indent-half flex flex-col sm:flex-row space-x-2">
                 @can("create", $block::class)

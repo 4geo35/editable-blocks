@@ -21,6 +21,18 @@
                 <span class="text-info text-sm">Не влияет на вывод на сайт, нужен только для удобства в панели администрирования.</span>
             </div>
 
+            <div>
+                <label for="blockRenderTitle" class="inline-block mb-2">
+                    Отображаемый заголовок
+                </label>
+                <input type="text" id="blockRenderTitle"
+                       class="form-control {{ $errors->has("renderTitle") ? "border-danger" : "" }}"
+                       wire:loading.attr="disabled"
+                       wire:model="renderTitle">
+                <x-tt::form.error name="renderTitle"/>
+                <span class="text-info text-sm">Если заполнен, то при выводе на сайт будет добавлен на блоком.</span>
+            </div>
+
             <div class="flex items-center space-x-indent-half">
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">
                     Отмена
