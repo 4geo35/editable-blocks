@@ -15,11 +15,11 @@ class BlockRenderActionsManager
 {
     public function getComponentByType(string $key): string
     {
-        if (! empty(config("editable-blocks.typeRenderComponents")[$key])) {
-            return config("editable-blocks.typeRenderComponents")[$key];
+        if (! empty(config("editable-blocks.availableTypes")[$key]["render"])) {
+            return config("editable-blocks.availableTypes")[$key]["render"];
         }
-        if (! empty(config("editable-blocks.customTypeRenderComponents")[$key])) {
-            return config("editable-blocks.customTypeRenderComponents")[$key];
+        if (! empty(config("editable-blocks.customAvailableTypes")[$key]["render"])) {
+            return config("editable-blocks.customAvailableTypes")[$key]["render"];
         }
         return ""; // TODO: make default component with error
     }

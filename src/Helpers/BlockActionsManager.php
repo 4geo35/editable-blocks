@@ -50,9 +50,10 @@ class BlockActionsManager
             config("editable-blocks.groups")[$key];
 
         $availableTypes = config("editable-blocks.availableTypes");
-        if (! empty(config("editable-blocks.customAvailableTypes")))
+        if (! empty(config("editable-blocks.customAvailableTypes"))) {
             $availableTypes = array_merge($availableTypes, config("editable-blocks.customAvailableTypes"));
-        if (empty($groupInfo["allowedTypes"])) return $availableTypes;
+        }
+        if (empty($groupInfo["allowedTypes"])) { return $availableTypes; }
 
         $array = [];
         foreach ($groupInfo["allowedTypes"] as $allowedType) {
@@ -64,11 +65,13 @@ class BlockActionsManager
 
     public function getTypeTitle(string $key): string
     {
-        if (empty(config("editable-blocks.availableTypes")[$key])) {
-            if (empty(config("editable-blocks.customAvailableTypes")[$key])) return "";
-            return config("editable-blocks.customAvailableTypes")[$key];
+        if (! empty(config("editable-blocks.availableTypes")[$key]["title"])) {
+            return config("editable-blocks.availableTypes")[$key]["title"];
         }
-        return config("editable-blocks.availableTypes")[$key];
+        if (! empty(config("editable-blocks.customAvailableTypes")[$key])) {
+            return config("editable-blocks.customAvailableTypes")[$key]["title"];
+        }
+        return "";
     }
 
     public function getBlocksByGroup(string $key, ShouldBlocksInterface $model = null): ?Collection
@@ -89,10 +92,12 @@ class BlockActionsManager
 
     public function getComponentByType(string $key): string
     {
-        if (empty(config("editable-blocks.typeComponents")[$key])) {
-            if (empty(config("editable-blocks.customTypeComponents")[$key])) return ""; // TODO: make default component with error
-            return config("editable-blocks.customTypeComponents")[$key];
+        if (! empty(config("editable-blocks.availableTypes")[$key]["admin"])) {
+            return config("editable-blocks.availableTypes")[$key]["admin"];
         }
-        return config("editable-blocks.typeComponents")[$key];
+        if (! empty(config("editable-blocks.customAvailableTypes")[$key]["admin"])) {
+            return config("editable-blocks.customAvailableTypes")[$key]["admin"];
+        }
+        return ""; // TODO: make default component with error
     }
 }

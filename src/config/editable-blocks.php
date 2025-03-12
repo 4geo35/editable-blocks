@@ -3,22 +3,22 @@
 return [
     // Settings
     "availableTypes" => [
-        "imageText" => "Текст с изображением",
-        "collapseText" => "Аккордеон",
+        "imageText" => [
+            "title" => "Текст с изображением",
+            // Livewire компонент для админки
+            "admin" => "eb-image-text",
+            // Компонент для вывода блока
+            "render" => "eb::types.image-text",
+        ],
+        "collapseText" => [
+            "title" => "Аккордеон",
+            // Livewire компонент для админки
+            "admin" => "eb-collapse-text",
+            // Компонент для вывода блока
+            "render" => "eb::types.collapse-text",
+        ],
     ],
     "customAvailableTypes" => [],
-    // Livewire компонент для админки
-    "typeComponents" => [
-        "imageText" => "eb-image-text",
-        "collapseText" => "eb-collapse-text",
-    ],
-    "customTypeComponents" => [],
-    // Компонент для вывода блока
-    "typeRenderComponents" => [
-        "imageText" => "eb::types.image-text",
-        "collapseText" => "eb::types.collapse-text",
-    ],
-    "customTypeRenderComponents" => [],
 
     "groups" => [],
     "static" => [],

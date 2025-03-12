@@ -20,14 +20,14 @@
                         @if (empty($blockList))
                             <span class="text-danger font-medium">Нет доступных для добавления блоков</span>
                         @endif
-                        @foreach($blockList as $type => $title)
+                        @foreach($blockList as $type => $info)
                             <button type="button"
                                     class="btn btn-primary my-1 sm:mr-indent-half"
                                     @cannot("create", config("editable-blocks.customBlockModel") ?? \GIS\EditableBlocks\Models\Block::class) disabled
                                     @else wire:loading.attr="disabled"
                                     @endcannot
                                     wire:click="showCreate('{{ $type }}')">
-                                {{ $title }}
+                                {{ $info["title"] }}
                             </button>
                         @endforeach
                     </div>
