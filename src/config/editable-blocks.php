@@ -7,16 +7,19 @@ return [
         "collapseText" => "Аккордеон",
     ],
     "customAvailableTypes" => [],
+    // Livewire компонент для админки
     "typeComponents" => [
         "imageText" => "eb-image-text",
         "collapseText" => "eb-collapse-text",
     ],
     "customTypeComponents" => [],
+    // Компонент для вывода блока
     "typeRenderComponents" => [
         "imageText" => "eb::types.image-text",
         "collapseText" => "eb::types.collapse-text",
     ],
     "customTypeRenderComponents" => [],
+
     "groups" => [],
     "static" => [],
     "models" => [],

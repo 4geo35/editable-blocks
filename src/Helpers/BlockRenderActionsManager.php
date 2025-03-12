@@ -15,11 +15,13 @@ class BlockRenderActionsManager
 {
     public function getComponentByType(string $key): string
     {
-        if (empty(config("editable-blocks.typeRenderComponents")[$key])) {
-            if (empty(config("editable-blocks.customTypeRenderComponents")[$key])) return ""; // TODO: make default component with error
+        if (! empty(config("editable-blocks.typeRenderComponents")[$key])) {
+            return config("editable-blocks.typeRenderComponents")[$key];
+        }
+        if (! empty(config("editable-blocks.customTypeRenderComponents")[$key])) {
             return config("editable-blocks.customTypeRenderComponents")[$key];
         }
-        return config("editable-blocks.typeRenderComponents")[$key];
+        return ""; // TODO: make default component with error
     }
 
     public function getByKey(string $key): ?BlockModelInterface
