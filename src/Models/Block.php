@@ -8,6 +8,7 @@ use GIS\EditableBlocks\Interfaces\BlockModelInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Block extends Model implements BlockModelInterface
@@ -24,6 +25,12 @@ class Block extends Model implements BlockModelInterface
     {
         $blockItemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
         return $this->hasMany($blockItemModelClass);
+    }
+
+    public function item(): HasOne
+    {
+        $blockItemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
+        return $this->hasOne($blockItemModelClass);
     }
 
     public function editable(): MorphTo

@@ -4,6 +4,7 @@ namespace GIS\EditableBlocks\Traits;
 
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
 use GIS\EditableBlocks\Interfaces\BlockModelInterface;
+use GIS\EditableBlocks\Models\BlockItem;
 use Livewire\Attributes\On;
 
 trait EditBlockTrait
@@ -94,5 +95,18 @@ trait EditBlockTrait
 
         $item->priority = $buff;
         $item->save();
+    }
+
+    protected function findItem(): ?BlockItemModelInterface
+    {
+        $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
+        $item = $itemModelClass::find($this->itemId);
+        if (! $item) {
+            session()->flash("item->{$this->block->id}-error", "Элемент не найден");
+            $this->closeData();
+            $this->closeDelete();
+            return null;
+        }
+        return $item;
     }
 }

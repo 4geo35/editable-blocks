@@ -4,6 +4,8 @@ namespace GIS\EditableBlocks\Interfaces;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use JsonSerializable;
 use Stringable;
 use Illuminate\Contracts\Broadcasting\HasBroadcastChannel;
@@ -17,4 +19,6 @@ interface BlockModelInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCa
     HasBroadcastChannel, Jsonable, JsonSerializable, QueueableEntity, Stringable, UrlRoutable
 {
     public function items(): HasMany;
+    public function item(): HasOne;
+    public function editable(): MorphTo;
 }

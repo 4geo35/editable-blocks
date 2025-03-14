@@ -24,13 +24,7 @@
                        wire:loading.attr="disabled"
                        wire:model.lazy="image">
                 <x-tt::form.error name="image" />
-                @if ($imageUrl)
-                    <div class="mt-indent-half">
-                        <a href="{{ $imageUrl }}" target="_blank" class="text-primary hover:text-primary-hover">
-                            Изображение
-                        </a>
-                    </div>
-                @endif
+                @include("eb::admin.types.includes.image-button")
             </div>
 
             <div>

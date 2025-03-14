@@ -94,19 +94,6 @@ trait SimpleItemActionsTrait
         session()->flash("item-{$this->block->id}-success", "Элемент успешно обновлен");
     }
 
-    protected function findItem(): ?BlockItemModelInterface
-    {
-        $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
-        $item = $itemModelClass::find($this->itemId);
-        if (! $item) {
-            session()->flash("item->{$this->block->id}-error", "Элемент не найден");
-            $this->closeData();
-            $this->closeDelete();
-            return null;
-        }
-        return $item;
-    }
-
     protected function resetFields(): void
     {
         $this->reset("itemId", "title", "description", "image", "imageUrl");
