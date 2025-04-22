@@ -33,7 +33,7 @@ trait EditBlockTrait
     {
         $this->resetFields();
         $this->itemId = $id;
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("delete", true)) return;
 
@@ -48,7 +48,7 @@ trait EditBlockTrait
 
     public function confirmDelete(): void
     {
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("delete", true)) return;
 
@@ -60,7 +60,7 @@ trait EditBlockTrait
     public function moveUp(int $itemId): void
     {
         $this->itemId = $itemId;
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("order")) return;
 
@@ -75,7 +75,7 @@ trait EditBlockTrait
     public function moveDown(int $itemId): void
     {
         $this->itemId = $itemId;
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("order")) return;
 
@@ -97,7 +97,7 @@ trait EditBlockTrait
         $item->save();
     }
 
-    protected function findItem(): ?BlockItemModelInterface
+    protected function findModel(): ?BlockItemModelInterface
     {
         $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
         $item = $itemModelClass::find($this->itemId);

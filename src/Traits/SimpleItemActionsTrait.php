@@ -58,7 +58,7 @@ trait SimpleItemActionsTrait
     {
         $this->resetFields();
         $this->itemId = $id;
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $record = $item->recordable;
@@ -74,7 +74,7 @@ trait SimpleItemActionsTrait
 
     public function update(): void
     {
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $record = $item->recordable;

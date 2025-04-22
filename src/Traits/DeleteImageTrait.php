@@ -10,7 +10,7 @@ trait DeleteImageTrait
 
     public function showClearImage(): void
     {
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $this->displayDeleteImage = true;
@@ -23,7 +23,7 @@ trait DeleteImageTrait
 
     public function clearImage(): void
     {
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) return;
         if (method_exists($this, "checkAuth") && ! $this->checkAuth("update", true)) return;
         $record = $item->recordable;
