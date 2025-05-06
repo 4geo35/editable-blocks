@@ -24,7 +24,7 @@
                        wire:loading.attr="disabled"
                        wire:model.lazy="image">
                 <x-tt::form.error name="image" />
-                @include("eb::admin.types.includes.image-button")
+                @include("tt::admin.delete-image-button")
             </div>
 
             <div>
