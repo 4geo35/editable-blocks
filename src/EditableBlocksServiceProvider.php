@@ -17,6 +17,7 @@ use GIS\EditableBlocks\Observers\BlockItemObserver;
 use GIS\EditableBlocks\Observers\BlockObserver;
 use GIS\EditableBlocks\Observers\SimpleBlockRecordObserver;
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -32,17 +33,10 @@ class EditableBlocksServiceProvider extends ServiceProvider
         $this->addLivewireComponents();
 
         // Observers
-        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
-        $blockObserverClass = config("editable-blocks.customBlockModelObserver") ?? BlockObserver::class;
-        $blockModelClass::observe($blockObserverClass);
+        $this->observeModels();
 
-        $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
-        $itemObserverClass = config("editable-blocks.customBlockItemModelObserver") ?? BlockItemObserver::class;
-        $itemModelClass::observe($itemObserverClass);
-
-        $simpleRecordClass = config("editable-config.customSimpleBlockRecordModel") ?? SimpleBlockRecord::class;
-        $simpleRecordObserverClass = config("editable-config.customSimpleBlockRecordObserver") ?? SimpleBlockRecordObserver::class;
-        $simpleRecordClass::observe($simpleRecordObserverClass);
+        // Policies
+        $this->setPolicies();
 
         // Expand configuration
         $this->expandConfiguration();
@@ -68,6 +62,26 @@ class EditableBlocksServiceProvider extends ServiceProvider
                 CreateBlocksCommand::class,
             ]);
         }
+    }
+
+    protected function setPolicies(): void
+    {
+        Gate::policy(config("editable-blocks.customBlockModel") ?? Block::class, config("editable-blocks.blockPolicy"));
+    }
+
+    protected function observeModels(): void
+    {
+        $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
+        $blockObserverClass = config("editable-blocks.customBlockModelObserver") ?? BlockObserver::class;
+        $blockModelClass::observe($blockObserverClass);
+
+        $itemModelClass = config("editable-blocks.customBlockItemModel") ?? BlockItem::class;
+        $itemObserverClass = config("editable-blocks.customBlockItemModelObserver") ?? BlockItemObserver::class;
+        $itemModelClass::observe($itemObserverClass);
+
+        $simpleRecordClass = config("editable-config.customSimpleBlockRecordModel") ?? SimpleBlockRecord::class;
+        $simpleRecordObserverClass = config("editable-config.customSimpleBlockRecordObserver") ?? SimpleBlockRecordObserver::class;
+        $simpleRecordClass::observe($simpleRecordObserverClass);
     }
 
     protected function addLivewireComponents(): void
