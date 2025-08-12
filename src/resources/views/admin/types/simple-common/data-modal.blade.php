@@ -7,11 +7,10 @@
               class="space-y-indent-half" id="imageTextBlockDataForm-{{ $block->id }}">
             <div>
                 <label for="imageTextTitle-{{ $block->id }}" class="inline-block mb-2">
-                    Заголовок <span class="text-danger">*</span>
+                    Заголовок
                 </label>
                 <input type="text" id="imageTextTitle-{{ $block->id }}"
                        class="form-control {{ $errors->has("title") ? "border-danger" : "" }}"
-                       required
                        wire:loading.attr="disabled"
                        wire:model="title">
                 <x-tt::form.error name="title"/>

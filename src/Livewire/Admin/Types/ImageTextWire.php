@@ -18,7 +18,7 @@ class ImageTextWire extends Component implements SimpleItemActionsInterface
     public function rules(): array
     {
         return [
-            "title" => ["required", "string", "max:150"],
+            "title" => ["nullable", "string", "max:150"],
             "description" => ["required", "string"],
             "image" => ["nullable", "image"],
         ];

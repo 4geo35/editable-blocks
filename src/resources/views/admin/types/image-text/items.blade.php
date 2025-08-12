@@ -13,7 +13,9 @@
                     <div class="row">
                         <div class="col w-full lg:w-1/2">
                             <div class="h-full flex flex-col justify-center">
-                                <h2 class="font-semibold text-2xl mb-indent-half">{{ $item->title }}</h2>
+                                @if (! empty($item->title))
+                                    <h2 class="font-semibold text-2xl mb-indent-half">{{ $item->title }}</h2>
+                                @endif
                                 <div class="prose max-w-none">{!! $item->recordable->markdown !!}</div>
                             </div>
                         </div>
@@ -31,7 +33,9 @@
                     </div>
                 @else
                     <div class="w-full lg:w-8/12">
-                        <h2 class="font-semibold text-2xl mb-indent-half">{{ $item->title }}</h2>
+                        @if (! empty($item->title))
+                            <h2 class="font-semibold text-2xl mb-indent-half">{{ $item->title }}</h2>
+                        @endif
                         <div class="prose max-w-none">{!! $item->recordable->markdown !!}</div>
                     </div>
                 @endif
