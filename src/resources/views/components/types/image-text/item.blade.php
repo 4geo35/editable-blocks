@@ -4,7 +4,9 @@
     @if ($hasImage)
         <div class="col w-full lg:w-1/2 ml-auto order-last {{ $index % 2 > 0 ? 'lg:order-last' : 'lg:order-first' }}">
             <div class="h-full flex flex-col justify-center mb-indent-half xl:w-[525px] mx-auto">
-                <h4 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h4>
+                @if ($item->title)
+                    <h4 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h4>
+                @endif
                 <div class="prose max-w-none prose-p:leading-6">
                     {!! $item->recordable->markdown !!}
                 </div>
@@ -22,7 +24,9 @@
             </a>
         </div>
     @else
-        <h4 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h4>
+        @if ($item->title)
+            <h4 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h4>
+        @endif
         <div class="prose max-w-none prose-p:leading-6">
             {!! $item->recordable->markdown !!}
         </div>
