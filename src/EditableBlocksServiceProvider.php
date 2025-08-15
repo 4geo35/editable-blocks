@@ -4,7 +4,6 @@ namespace GIS\EditableBlocks;
 
 use GIS\EditableBlocks\Commands\CreateBlocksCommand;
 use GIS\EditableBlocks\Helpers\BlockRenderActionsManager;
-use GIS\EditableBlocks\Livewire\Admin\Types\CollapseTextWire;
 use GIS\EditableBlocks\Helpers\BlockActionsManager;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\BlockListWire;
 use GIS\EditableBlocks\Livewire\Admin\Blocks\ManageBlocksWire;
@@ -102,13 +101,6 @@ class EditableBlocksServiceProvider extends ServiceProvider
         Livewire::component(
             "eb-block-list",
             $component ?? BlockListWire::class
-        );
-
-        // Types
-        $component = config("editable-blocks.customCollapseTextComponent");
-        Livewire::component(
-            "eb-collapse-text",
-            $component ?? CollapseTextWire::class
         );
     }
 

@@ -2,15 +2,7 @@
 
 return [
     // Settings
-    "availableTypes" => [
-        "collapseText" => [
-            "title" => "Аккордеон",
-            // Livewire компонент для админки
-            "admin" => "eb-collapse-text",
-            // Компонент для вывода блока
-            "render" => "eb::types.collapse-text",
-        ],
-    ],
+    "availableTypes" => [],
     "customAvailableTypes" => [],
 
     "groups" => [],
@@ -35,16 +27,8 @@ return [
     "customManageBlocksComponent" => null,
     "customBlockListComponent" => null,
 
-    "customCollapseTextComponent" => null,
-
     // Templates
-    "templates" => [
-        "collapse-record" => \GIS\EditableBlocks\Templates\CollapseRecord::class,
-        "collapse-record-tablet" => \GIS\EditableBlocks\Templates\CollapseRecordTablet::class,
-        "collapse-record-mobile" => \GIS\EditableBlocks\Templates\CollapseRecordMobile::class,
-
-        "collapse-record-two-thirds" => \GIS\EditableBlocks\Templates\CollapseRecordTwoThirds::class,
-    ],
+    "templates" => [],
 
     // Policy
     "blockPolicyTitle" => "Управление блоками",
