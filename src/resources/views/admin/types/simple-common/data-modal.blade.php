@@ -4,7 +4,7 @@
     </x-slot>
     <x-slot name="content">
         <form wire:submit.prevent="{{ $itemId ? 'update' : 'store' }}"
-              class="space-y-indent-half" id="imageTextBlockDataForm-{{ $block->id }}">
+              class="space-y-indent-half" id="simpleCommonBlockDataForm-{{ $block->id }}">
             <div>
                 <label for="imageTextTitle-{{ $block->id }}" class="inline-block mb-2">
                     Заголовок
@@ -48,7 +48,7 @@
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">
                     Отмена
                 </button>
-                <button type="submit" form="imageTextBlockDataForm-{{ $block->id }}" class="btn btn-primary" wire:loading.attr="disabled">
+                <button type="submit" form="simpleCommonBlockDataForm-{{ $block->id }}" class="btn btn-primary" wire:loading.attr="disabled">
                     {{ $itemId ? "Обновить" : "Добавить" }}
                 </button>
             </div>
