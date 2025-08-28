@@ -6,10 +6,10 @@
         <form wire:submit.prevent="{{ $itemId ? 'update' : 'store' }}"
               class="space-y-indent-half" id="simpleCommonBlockDataForm-{{ $block->id }}">
             <div>
-                <label for="imageTextTitle-{{ $block->id }}" class="inline-block mb-2">
+                <label for="simpleCommonTitle-{{ $block->id }}" class="inline-block mb-2">
                     Заголовок
                 </label>
-                <input type="text" id="imageTextTitle-{{ $block->id }}"
+                <input type="text" id="simpleCommonTitle-{{ $block->id }}"
                        class="form-control {{ $errors->has("title") ? "border-danger" : "" }}"
                        wire:loading.attr="disabled"
                        wire:model="title">
@@ -17,8 +17,8 @@
             </div>
 
             <div>
-                <label for="imageTextImage-{{ $block->id }}" class="inline-block mb-2">Изображение</label>
-                <input type="file" id="imageTextImage-{{ $block->id }}"
+                <label for="simpleCommonImage-{{ $block->id }}" class="inline-block mb-2">Изображение</label>
+                <input type="file" id="simpleCommonImage-{{ $block->id }}"
                        class="form-control {{ $errors->has('image') ? 'border-danger' : '' }}"
                        wire:loading.attr="disabled"
                        wire:model.lazy="image">
@@ -27,12 +27,12 @@
             </div>
 
             <div>
-                <label for="imageTextDescription-{{ $block->id }}" class="flex justify-start items-center mb-2">
+                <label for="simpleCommonDescription-{{ $block->id }}" class="flex justify-start items-center mb-2">
                     Описание
-                    @include("tt::admin.description-button", ["id" => "imageTextHidden-{$block->id}"])
+                    @include("tt::admin.description-button", ["id" => "simpleCommonHidden-{$block->id}"])
                 </label>
-                @include("tt::admin.description-info", ["id" => "imageTextHidden-{$block->id}"])
-                <textarea id="imageTextDescription-{{ $block->id }}" class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"
+                @include("tt::admin.description-info", ["id" => "simpleCommonHidden-{$block->id}"])
+                <textarea id="simpleCommonDescription-{{ $block->id }}" class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"
                           rows="10"
                           wire:model.live="description">
                         {{ $description }}
