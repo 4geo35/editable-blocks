@@ -1,6 +1,7 @@
 <div class="">
     @if ($currentGroup != "static")
         <div class="card">
+            <x-tt::wire-loading />
             <div class="card-header">
                 <div class="flex justify-between">
                     <h2 class="font-medium text-2xl">Добавить блок</h2>

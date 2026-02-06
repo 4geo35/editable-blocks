@@ -8,7 +8,8 @@
                 @foreach($buttons as $button)
                     <button type="button"
                             class="btn {{ $button->key === $currentGroup ? 'btn-dark' : 'btn-outline-dark' }} my-1 sm:mr-indent-half"
-                            wire:click="setGroup('{{ $button->key }}')">
+                            wire:click="setGroup('{{ $button->key }}')"
+                            wire:loading.attr="disabled">
                         {{ $button->title }}
                     </button>
                 @endforeach

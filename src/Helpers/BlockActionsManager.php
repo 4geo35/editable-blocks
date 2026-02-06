@@ -79,14 +79,15 @@ class BlockActionsManager
         if ($model && ! $this->checkIfModelExists($model)) return null;
         if (! $this->checkIfGroupExists($key)) return null;
 
-        if ($model) $query = $model->blocks();
+        if ($model) { $query = $model->blocks(); }
         else {
             $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;
             $query = $blockModelClass::query();
         }
-        if ($key === "static") $query->whereNotNull("key");
-        elseif (! $model) $query->where("group", $key);
-        if ($key === "static") return $query->orderBy("title")->get();
+        if ($key === "static") { $query->whereNotNull("key"); }
+        elseif (! $model) { $query->where("group", $key); }
+
+        if ($key === "static") { return $query->orderBy("title")->get(); }
         return $query->orderBy("priority")->get();
     }
 
