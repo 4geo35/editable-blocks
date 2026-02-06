@@ -1,7 +1,8 @@
 <div class="">
     @if ($currentGroup != "static")
         <div class="card">
-            <x-tt::wire-loading />
+            {{-- Тут такой длинный список, потому что метод вызывается событием из другого компонента и этот момент невозможно отловить, и тут либо исключить все методы и переменные, либо загрузка будет показываться при любом клике. Такие дела --}}
+            <x-tt::wire-loading wire:target.except="showCreate, closeData, store, showEdit, update, showDelete, closeDelete, confirmDelete, showOrder, closeOrder, reorderItems, displayData, displayDelete, displayOrder" />
             <div class="card-header">
                 <div class="flex justify-between">
                     <h2 class="font-medium text-2xl">Добавить блок</h2>
