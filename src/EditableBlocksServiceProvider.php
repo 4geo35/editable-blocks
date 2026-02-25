@@ -22,44 +22,34 @@ use Livewire\Livewire;
 class EditableBlocksServiceProvider extends ServiceProvider
 {
     use ExpandTemplatesTrait;
-    public function boot(): void
-    {
-        // Views
-        $this->loadViewsFrom(__DIR__ . "/resources/views", "eb");
-
-        // Livewire
-        $this->addLivewireComponents();
-
-        // Observers
-        $this->observeModels();
-
-        // Policies
-        $this->setPolicies();
-
-        // Expand configuration
-        $this->expandConfiguration();
-    }
 
     public function register(): void
     {
-        // Migrations
         $this->loadMigrationsFrom(__DIR__ . "/database/migrations");
 
-        // Config
         $this->mergeConfigFrom(__DIR__ . "/config/editable-blocks.php", "editable-blocks");
 
-        // Routes
-        $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
-
-        // Facades
         $this->initFacades();
 
-        // Commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateBlocksCommand::class,
             ]);
         }
+    }
+
+    public function boot(): void
+    {
+        $this->loadViewsFrom(__DIR__ . "/resources/views", "eb");
+
+        $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
+
+        $this->expandConfiguration();
+        $this->observeModels();
+        $this->setPolicies();
+        
+        $this->addLivewireComponents();
+
     }
 
     protected function setPolicies(): void
