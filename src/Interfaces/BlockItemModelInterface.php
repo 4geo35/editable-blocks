@@ -4,6 +4,7 @@ namespace GIS\EditableBlocks\Interfaces;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use JsonSerializable;
 use Stringable;
@@ -19,4 +20,6 @@ interface BlockItemModelInterface extends Arrayable, ArrayAccess, CanBeEscapedWh
 {
     public function block(): BelongsTo;
     public function recordable(): MorphTo;
+    public function buttons(): HasMany;
+    public function orderedButtons(): HasMany;
 }
