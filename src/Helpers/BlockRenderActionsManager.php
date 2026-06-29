@@ -32,7 +32,7 @@ class BlockRenderActionsManager
             $query = $blockModelClass::query();
             $query->with([
                 "items" => function (HasMany $many) {
-                    $many->with("recordable");
+                    $many->with("recordable", "buttons");
                     $many->orderBy("priority");
                 }
             ]);

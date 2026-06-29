@@ -32,7 +32,7 @@ class BlockItemObserver
     public function deleted(BlockItemModelInterface $item): void
     {
         $record = $item->recordable;
-        if (! empty($record)) $record->delete();
+        if (! empty($record)) { $record->delete(); }
         $this->forgetCache($item);
     }
 
