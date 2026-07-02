@@ -1,5 +1,7 @@
 ### Установка
 
+Пройтись по установке `editable-block-buttons` и `editable-block-texts`
+
 Добавить `"./vendor/4geo35/editable-blocks/src/resources/views/components/**/*.blade.php",
 "./vendor/4geo35/editable-blocks/src/resources/views/admin/**/*.blade.php",
 "./vendor/4geo35/editable-blocks/src/resources/views/livewire/admin/**/*.blade.php",` в `tailwind.admin.config.js`, созданный в пакете `tailwindcss-theme`.

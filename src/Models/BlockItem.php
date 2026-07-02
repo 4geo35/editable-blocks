@@ -4,13 +4,14 @@ namespace GIS\EditableBlocks\Models;
 
 use GIS\EditableBlockButtons\Traits\ShouldButtons;
 use GIS\EditableBlocks\Interfaces\BlockItemModelInterface;
+use GIS\EditableBlockTexts\Traits\ShouldTexts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class BlockItem extends Model implements BlockItemModelInterface
 {
-    use ShouldButtons;
+    use ShouldButtons, ShouldTexts;
 
     protected $fillable = [
         "title",
