@@ -68,6 +68,7 @@ class ManageBlocksWire extends Component
     public function render(): View
     {
         $blockList = BlockActions::getAvailableBlocks($this->currentGroup, $this->model);
+        debugbar()->info($blockList);
         return view('eb::livewire.admin.blocks.manage-blocks-wire', compact("blockList"));
     }
 

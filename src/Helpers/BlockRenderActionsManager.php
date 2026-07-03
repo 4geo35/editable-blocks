@@ -138,6 +138,6 @@ class BlockRenderActionsManager
 
     protected function expandSimpleBlockRecord(SimpleBlockRecordModelInterface $record): void
     {
-        $record->load("image");
+        $record->load("image", "orderedImages", "cover");
     }
 }

@@ -5,6 +5,7 @@ namespace GIS\EditableBlocks\Helpers;
 use GIS\EditableBlocks\Interfaces\ShouldBlocksInterface;
 use GIS\EditableBlocks\Models\Block;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class BlockActionsManager
 {
@@ -53,14 +54,20 @@ class BlockActionsManager
         if (! empty(config("editable-blocks.customAvailableTypes"))) {
             $availableTypes = array_merge($availableTypes, config("editable-blocks.customAvailableTypes"));
         }
-        if (empty($groupInfo["allowedTypes"])) { return $availableTypes; }
+        if (empty($groupInfo["allowedTypes"])) {
+            return Arr::sort($availableTypes, function (array $value) {
+                return $value["title"];
+            });
+        }
 
         $array = [];
         foreach ($groupInfo["allowedTypes"] as $allowedType) {
             if (empty($availableTypes[$allowedType])) continue;
             $array[$allowedType] = $availableTypes[$allowedType];
         }
-        return $array;
+        return Arr::sort($array, function (array $value) {
+            return $value["title"];
+        });
     }
 
     public function getTypeTitle(string $key): string
