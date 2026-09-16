@@ -86,7 +86,7 @@ class BlockRenderActionsManager
 
     public function getByModel(ShouldBlocksInterface $model): ?Collection
     {
-        $cacheKey = "model-block:{$model->table}:{$model->id}";
+        $cacheKey = "model-block:{$model->getTable()}:{$model->id}";
         return Cache::rememberForever($cacheKey, function () use ($model) {
             $query = $model->blocks();
             $query->with([
