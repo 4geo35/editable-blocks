@@ -2,17 +2,32 @@
 
 Пройтись по установке `editable-block-buttons` и `editable-block-texts`
 
-Добавить `"./vendor/4geo35/editable-blocks/src/resources/views/components/**/*.blade.php",
-"./vendor/4geo35/editable-blocks/src/resources/views/admin/**/*.blade.php",
-"./vendor/4geo35/editable-blocks/src/resources/views/livewire/admin/**/*.blade.php",` в `tailwind.admin.config.js`, созданный в пакете `tailwindcss-theme`.
+Добавить в `tailwind.admin.config.js`, созданный в пакете `tailwindcss-theme`.
 
-Добавить `"./vendor/4geo35/editable-blocks/src/resources/views/components/**/*.blade.php",` в `tailwind.config.js`, созданный в пакете `tailwindcss-theme`.
+    "./vendor/4geo35/editable-blocks/src/resources/views/components/**/*.blade.php",
+    "./vendor/4geo35/editable-blocks/src/resources/views/admin/**/*.blade.php",
+    "./vendor/4geo35/editable-blocks/src/resources/views/livewire/admin/**/*.blade.php",
+
+Добавить в `tailwind.config.js`, созданный в пакете `tailwindcss-theme`.
+
+    "./vendor/4geo35/editable-blocks/src/resources/views/components/**/*.blade.php",
 
 Запустить миграции для создания таблиц `php artisan migrate`
 
 Установить lightbox `npm install fslightbox`, добавить в `app.js`:
 
     import "fslightbox"
+
+#### Views
+
+Сокращение для представлений: `eb`  
+Меню для панели администрирования: `<x-eb::menu-item/>`
+
+#### Commands
+
+    php artisan eb:blocks
+
+Команда создает статичные блоки на основе переменной в конфиге `static`
 
 ### Вывод
 
