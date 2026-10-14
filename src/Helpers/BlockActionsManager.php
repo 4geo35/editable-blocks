@@ -40,7 +40,7 @@ class BlockActionsManager
         return isset(config("editable-blocks.models")[$model->block_group]);
     }
 
-    public function getAvailableBlocks(string $key, ShouldBlocksInterface $model = null): array
+    public function getAvailableBlocks(string $key, ?ShouldBlocksInterface $model = null): array
     {
         if ($model && ! $this->checkIfModelExists($model)) return [];
         if (! $this->checkIfGroupExists($key)) return [];
@@ -81,7 +81,7 @@ class BlockActionsManager
         return "";
     }
 
-    public function getBlocksByGroup(string $key, ShouldBlocksInterface $model = null): ?Collection
+    public function getBlocksByGroup(string $key, ?ShouldBlocksInterface $model = null): ?Collection
     {
         if ($model && ! $this->checkIfModelExists($model)) return null;
         if (! $this->checkIfGroupExists($key)) return null;

@@ -223,7 +223,7 @@ class ManageBlocksWire extends Component
         $this->reset("type", "typeTitle", "title", "renderTitle", "blockId", "blockOrderList");
     }
 
-    protected function checkAuth(string $action, BlockModelInterface $block = null): bool
+    protected function checkAuth(string $action, ?BlockModelInterface $block = null): bool
     {
         try {
             $blockModelClass = config("editable-blocks.customBlockModel") ?? Block::class;

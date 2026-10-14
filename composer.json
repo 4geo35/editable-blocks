@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "4geo35/tailwindcss-theme": "^1.3",
-        "4geo35/user-management": "^1.1",
-        "4geo35/fileable": "^1.2",
-        "4geo35/editable-block-buttons": "^1.1",
-        "4geo35/editable-block-texts": "^1.0"
+        "4geo35/tailwindcss-theme": "^2.0",
+        "4geo35/user-management": "^2.0",
+        "4geo35/fileable": "^2.0",
+        "4geo35/editable-block-buttons": "^2.0",
+        "4geo35/editable-block-texts": "^2.0"
     },
     "autoload": {
         "psr-4": {
