@@ -24,7 +24,12 @@ class BlockObserver
         $block->priority = $priority + 1;
     }
 
-    public function updating(BlockModelInterface $block): void
+    public function created(BlockModelInterface $block): void
+    {
+        $this->forgetCache($block);
+    }
+
+    public function updated(BlockModelInterface $block): void
     {
         $this->forgetCache($block);
     }

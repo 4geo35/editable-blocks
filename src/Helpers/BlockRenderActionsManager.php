@@ -110,7 +110,7 @@ class BlockRenderActionsManager
 
     public function forgetByModel(ShouldBlocksInterface $model): void
     {
-        Cache::forget("model-block:{$model->table}:{$model->id}");
+        Cache::forget("model-block:{$model->getTable()}:{$model->id}");
     }
 
     protected function callExpandRecordable(BlockItemModelInterface $item): void
